@@ -17,6 +17,7 @@
     --blue:#4D8DFF;
     --cyan:#37CBE0;
     --rose:#FF6FA3;
+    --scn:#E0833A;
     --grad:linear-gradient(135deg,#8B6CFF 0%,#4D8DFF 52%,#37CBE0 100%);
     --h1:#EAE7FF; --h2:#CFC5FF; --h3:#A795FF; --h4:#7C63F0; --h5:#5235C9;
     --mono:ui-monospace,"SF Mono","Cascadia Code","Roboto Mono",Consolas,monospace;
@@ -57,7 +58,8 @@
   .glass{background:var(--glass);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);
     border:1px solid rgba(255,255,255,.72);border-radius:20px;box-shadow:var(--shadow)}
 
-  header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px}
+  header.top{display:flex;flex-direction:column;align-items:stretch;gap:14px;margin-bottom:20px}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
   .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
     background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600}
   h1{font-size:clamp(24px,3.4vw,34px);line-height:1.04;margin:8px 0 5px;letter-spacing:-.015em;font-weight:700}
@@ -65,6 +67,7 @@
   .period{color:var(--muted);font-size:13px}
   .period .num{color:var(--ink-soft)}
   .clock{padding:11px 18px;min-width:158px;text-align:right}
+  .topbar .clock{min-width:0;text-align:left;padding:9px 14px}
   .clock .lab{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
   .clock .d{font-family:var(--mono);font-size:21px;font-weight:600;margin-top:3px;
     background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -102,6 +105,8 @@
     border-radius:999px;padding:5px 13px;cursor:pointer;transition:.14s;user-select:none}
   .chip:hover{border-color:var(--violet);color:var(--violet);transform:translateY(-1px)}
   .chip.on{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 6px 16px -6px rgba(110,90,230,.6)}
+  .chip.disabled{opacity:.38;text-decoration:line-through;cursor:not-allowed}
+  .chip.disabled:hover{border-color:var(--line);color:var(--ink-soft);transform:none}
   .reset{margin-left:auto;font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:var(--sans)}
   .reset:hover{color:var(--rose)}
 
@@ -112,6 +117,45 @@
   .sec-h{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
   .sec-h .tt{font-size:15px;font-weight:700;display:flex;align-items:center;gap:9px}
   .sec-h .tt .glyph{width:22px;height:22px;border-radius:7px;background:var(--grad);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+  .sec-h .tt .tt-txt{display:flex;flex-direction:column;gap:1px;line-height:1.18}
+  .sec-h .tt .tt-sub{font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:0}
+  .sec-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+  .iconbtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.5);color:var(--ink-soft);cursor:pointer;transition:.12s;flex:0 0 auto}
+  .iconbtn:hover{border-color:#6e5ae6;color:var(--ink)}
+  .iconbtn svg{display:block}
+  .matrixcard .sec-h{align-items:flex-start;margin-bottom:10px}
+  .mxnav-row{margin-bottom:12px}
+  .mxmode-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .seg-toggle.sm button{padding:5px 11px;font-size:12px}
+  .ratebox{display:none;align-items:center;gap:7px;font-size:11.5px;color:var(--muted)}
+  .ratebox.show{display:inline-flex}
+  .ratebox input{width:60px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:13px;text-align:center}
+  .mxc .pp{font-size:10.5px;opacity:.9;display:block;line-height:1.1;margin-top:1px}
+  .mxc.nohc{opacity:.5}
+  .auth-toggle-row{text-align:center;margin-top:10px}
+  .auth-toggle{color:#474b73;cursor:pointer;font-size:13px;text-decoration:underline;opacity:.9}
+  .auth-toggle:hover{opacity:1}
+  .scn-btn{margin-left:auto;border-color:var(--scn);color:var(--scn)}
+  .scenario-bar{border:1px solid var(--scn);background:rgba(224,131,58,.08);border-radius:11px;padding:10px 12px;margin-bottom:12px;display:flex;flex-direction:column;gap:7px}
+  .scn-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .scn-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.04em;background:var(--scn);color:#fff;padding:2px 8px;border-radius:999px}
+  .scn-title{font-weight:600;font-size:13px}
+  .scn-verdict{font-size:12px;color:var(--ink-soft);line-height:1.45}
+  .scn-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .scn-reset{color:var(--scn);border-color:var(--scn)}
+  table.mx td.mxc.scn{outline:1.6px dashed var(--scn);outline-offset:-2px}
+  .mxc .mn.delta{color:var(--scn);font-weight:700}
+  .st-badge{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;padding:1px 6px;border-radius:999px;color:#fff;white-space:nowrap;vertical-align:middle}
+  .st-badge.st-prop{background:var(--scn)}
+  .st-badge.st-acc{background:#6E5AE6}
+  .st-badge.st-done{background:#2FA86A}
+  .st-badge.st-hold{background:#8A8FB0}
+  .st-badge.st-rej{background:#C9596F}
+  .ini.st-rej{opacity:.55}
+  .ini.st-rej .ini-name{text-decoration:line-through;text-decoration-color:rgba(0,0,0,.28)}
+  .ini.st-prop .run-fill{opacity:.5}
+  .ini.st-prop,.ini.st-done,.ini.st-hold{opacity:.9}
+  #propToggle.on{background:var(--scn);color:#fff;border-color:transparent}
 
   .timeline{padding:16px 18px;margin-bottom:18px}
   .zoom{display:flex;gap:6px}
@@ -195,7 +239,7 @@
   .modal-overlay{position:fixed;inset:0;background:rgba(30,28,60,.42);backdrop-filter:blur(4px);z-index:50;
     display:none;align-items:flex-start;justify-content:center;padding:24px 14px;overflow-y:auto}
   .modal-overlay.open{display:flex}
-  .modal{width:100%;max-width:520px;padding:0;overflow:hidden;margin:auto}
+  .modal{width:100%;max-width:520px;padding:0;overflow:hidden;margin:0}
   .modal-h{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--line)}
   .modal-title{font-size:15px;font-weight:700}
   .modal-x{border:none;background:none;font-size:17px;color:var(--muted);cursor:pointer;line-height:1}
@@ -205,7 +249,7 @@
   .fld2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .fl{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:8px}
   .fld input{font-family:var(--sans);font-size:14px;color:var(--ink);border:1px solid var(--line);border-radius:10px;
-    padding:9px 11px;background:rgba(255,255,255,.7);width:100%}
+    padding:9px 11px;background:rgba(255,255,255,.7);width:100%;min-width:0}
   .fld input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(140,108,255,.15)}
   .alltog{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);
     background:rgba(255,255,255,.6);color:var(--violet);border-radius:6px;padding:1px 7px;cursor:pointer}
@@ -252,6 +296,8 @@
   table.mx td.mxc.has{cursor:pointer}
   table.mx td.mxc.has:hover{outline:2px solid var(--violet);outline-offset:-1px}
   table.mx td.mxc.hl{outline:2px solid var(--violet);outline-offset:-1px}
+  table.mx td.mxc.na{background:repeating-linear-gradient(45deg,rgba(120,120,180,.06),rgba(120,120,180,.06) 5px,transparent 5px,transparent 10px);border-style:dashed;cursor:default}
+  table.mx td.mxc.na .namark{color:var(--muted);font-size:13px;opacity:.5}
   .mxc .mt{display:block;font-size:12px;font-weight:600;line-height:1.1}
   .mxc .mn{display:block;font-size:8px;opacity:.7}
   table.mx td.tot,table.mx th.tot{font-size:11px;font-weight:600;color:var(--ink-soft);background:rgba(140,108,255,.07);border-radius:7px;padding:4px 8px}
@@ -259,13 +305,22 @@
   table.mx .corner{background:transparent}
 
   /* cells editor */
-  .cellseditor{display:flex;flex-direction:column;gap:7px}
-  .cellrow{display:grid;grid-template-columns:1fr 1fr 74px 30px;gap:6px;align-items:center}
-  .cellrow select{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:8px;padding:7px 6px;background:rgba(255,255,255,.7);color:var(--ink)}
+  .cellseditor{display:flex;flex-direction:column;gap:7px}.cellrow{display:grid;grid-template-columns:1fr 1fr 74px 30px;gap:6px;align-items:center}
+  .cellrow select{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:8px;padding:7px 6px;background:rgba(255,255,255,.7);color:var(--ink);width:100%;min-width:0}
   .cellrow .ctasks{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:8px;padding:7px 8px;background:rgba(255,255,255,.7);width:100%}
   .cellrow .cdel{border:1px solid var(--line);background:rgba(255,255,255,.6);color:var(--rose);border-radius:8px;height:30px;cursor:pointer;font-size:12px}
   .cellrow .cdel:hover{background:var(--rose);color:#fff;border-color:transparent}
   .addcell{margin-top:8px;font-family:var(--mono);font-size:12px;border:1px dashed var(--line);background:rgba(255,255,255,.5);color:var(--violet);border-radius:9px;padding:7px 12px;cursor:pointer;width:fit-content}
+  .quickpick{border:1px solid var(--line-soft);background:rgba(140,108,255,.045);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px}
+  .qp-lab{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .qp-row{display:flex;align-items:flex-start;gap:8px}
+  .qp-cap{font-size:11px;color:var(--muted);min-width:62px;padding-top:5px}
+  .qp-chips{display:flex;flex-wrap:wrap;gap:5px;flex:1}
+  .qp-chip{font-family:var(--mono);font-size:11px;border:1px solid var(--line);background:rgba(255,255,255,.6);color:var(--ink-soft);border-radius:7px;padding:4px 9px;cursor:pointer;transition:.12s}
+  .qp-chip.on{background:var(--grad);color:#fff;border-color:transparent}
+  .qp-chip.disabled{opacity:.32;cursor:not-allowed;background:rgba(255,255,255,.4);color:var(--muted)}
+  .qp-hint{font-size:10.5px;color:var(--muted);line-height:1.4}
+  .qp-msg{font-size:11px;color:var(--violet);line-height:1.4;min-height:1px}
   .addcell:hover{border-color:var(--violet);background:rgba(140,108,255,.08)}
   .celltot{margin-top:7px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-soft)}
 
@@ -385,8 +440,14 @@
     .gtip{font-size:10px;gap:10px}
     .ftag{width:64px}
     .run-end{min-width:68px;font-size:9.5px}
-    .fld2{grid-template-columns:1fr}
+    .fld2{grid-template-columns:1fr 1fr;gap:8px}
+    .fld2 input[type=date]{font-size:13px;padding:8px 8px}
     .modal-body{padding:14px}
+    .topbar{gap:8px}
+    .userbox{gap:6px;font-size:11px}
+    .userbox .ub-name{max-width:104px}
+    .userbox .ub-out{font-size:10px}
+    .hcinput{width:52px;padding:6px 4px}
   }
   @media (max-width:900px){
     .main{grid-template-columns:1fr}
@@ -394,20 +455,68 @@
     .gwrap{grid-template-columns:150px 1fr}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  .loglist{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow:auto;margin-top:4px}
+  .logrow{border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:rgba(255,255,255,.45)}
+  .logtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .logact{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:999px;color:#fff}
+  .logact.cr{background:#2fa86a}.logact.up{background:#6e5ae6}.logact.de{background:#d05a72}
+  .logttl{font-weight:600;font-size:13px}
+  .logmeta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:3px}
+  .logdet{margin:6px 0 0;padding-left:16px;font-size:12px;color:var(--ink-soft);line-height:1.5}
+  .lognote{font-size:11px;color:var(--muted);background:rgba(110,90,230,.07);border:1px solid var(--line);border-radius:9px;padding:8px 10px;margin:8px 0;line-height:1.45}
+  .auth-overlay{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 120% at 50% 0%, #2a2752 0%, #1a1836 60%, #131129 100%)}
+  .auth-overlay.hidden{display:none}
+  .auth-card{width:min(380px,100%);padding:26px 24px;border-radius:18px;text-align:left}
+  .auth-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;font-weight:600}
+  .auth-title{font-size:22px;margin:6px 0 4px}
+  .auth-sub{font-size:12px;color:var(--muted);margin:0 0 16px;line-height:1.5}
+  .auth-btn{width:100%;margin-top:6px}
+  .auth-note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.45}
+  .userbox{display:flex;align-items:center;gap:6px;font-size:12px;padding-top:5px}
+  .userbox .ub-name{font-weight:500;color:var(--muted);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .userbox .ub-out{font-family:var(--mono);font-size:11px;border:none;background:transparent;color:var(--muted);padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px;transition:.12s}
+  .userbox .ub-out:hover{color:var(--ink-soft)}
+  .hctable{border-collapse:separate;border-spacing:4px;font-size:12px;margin-top:2px}
+  .hctable th.cseg{font-family:var(--mono);font-size:10px;color:var(--muted);padding:2px 4px;text-align:center;white-space:nowrap}
+  .hctable th.creg{font-size:11px;text-align:right;padding:2px 8px 2px 2px;white-space:nowrap;color:var(--ink-soft);font-weight:600}
+  .hctable td{padding:0;text-align:center}
+  .hctable td.na{color:var(--muted);opacity:.4}
+  .hcinput{width:60px;padding:7px 6px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.6);font-family:var(--mono);font-size:13px;text-align:center;color:var(--ink)}
+  .hcinput:focus{outline:none;border-color:#6e5ae6;background:#fff}
 </style>
 </head>
 <body>
+<div class="auth-overlay" id="authScreen">
+  <div class="auth-card glass">
+    <div class="auth-eyebrow">Sales Operations · Орбита инициатив</div>
+    <h2 class="auth-title">Вход в календарь</h2>
+    <p class="auth-sub">Войдите по эл. почте и паролю. Под этой учётной записью логируются ваши изменения.</p>
+    <label class="fld" id="nameField" style="display:none"><span class="fl">Имя</span>
+      <input type="text" id="authNick" placeholder="Как отображать вас в команде" maxlength="60" autocomplete="name"></label>
+    <label class="fld"><span class="fl">Эл. почта</span>
+      <input type="email" id="authName" placeholder="you@company.ru" maxlength="120" autocomplete="username"></label>
+    <label class="fld"><span class="fl">Пароль</span>
+      <input type="password" id="authPass" placeholder="Пароль (мин. 6 символов)" maxlength="80" autocomplete="current-password"></label>
+    <div class="mErr" id="authErr"></div>
+    <button class="save auth-btn" id="authBtn">Войти</button>
+    <div class="auth-toggle-row"><span class="auth-toggle" id="authToggle">Нет аккаунта? Регистрация</span></div>
+    <div class="auth-note">Общий план команды хранится в базе Supabase. Любой вошедший участник видит и редактирует один и тот же план; изменения синхронизируются у всех.</div>
+  </div>
+</div>
 <div class="wrap">
 
   <header class="top">
-    <div>
+    <div class="topbar">
+      <div class="clock glass">
+        <div class="lab">Сегодня</div>
+        <div class="d num" id="todayLbl"></div>
+      </div>
+      <div class="userbox"><span class="ub-name" id="userName">—</span><button class="ub-out" id="logoutBtn">выйти</button></div>
+    </div>
+    <div class="head-title">
       <div class="eyebrow">Sales Operations · Орбита инициатив</div>
       <h1>Календарь <span class="g">sales-активностей</span></h1>
-      <div class="period">Период: <span class="num" id="pStart"></span> → <span class="num" id="pEnd"></span> · старт от сегодня</div>
-    </div>
-    <div class="clock glass">
-      <div class="lab">Сегодня</div>
-      <div class="d num" id="todayLbl"></div>
+      <div class="period">Период: <span class="num" id="pStart"></span> → <span class="num" id="pEnd"></span></div>
     </div>
   </header>
 
@@ -415,19 +524,53 @@
 
   <section class="filters glass">
     <div class="frow">
-      <div class="ftag">Регион</div>
-      <div id="regionChips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      <div class="ftag">Сегмент</div>
+      <div id="segChips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
       <button class="reset" id="resetBtn">Сбросить фильтры</button>
     </div>
     <div class="frow">
-      <div class="ftag">Сегмент</div>
-      <div id="segChips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      <div class="ftag">Регион</div>
+      <div id="regionChips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     </div>
     <div class="frow">
-      <div class="ftag">Активности</div>
-      <button class="extoggle" id="exToggle">Исключить из расчёта <span id="exCount"></span></button>
+      <div class="ftag">Тип</div>
+      <div class="seg-toggle" id="typeFilter">
+        <button data-tf="all" class="on">Все</button>
+        <button data-tf="once">Кампании</button>
+        <button data-tf="ongoing">Сигналы</button>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="ftag">Метрики</div>
+      <button class="extoggle" id="exToggle">Выбор инициатив <span id="exCount"></span></button>
     </div>
     <div class="expanel" id="exPanel"></div>
+  </section>
+
+  <section class="card glass matrixcard">
+    <div class="sec-h">
+      <div class="tt"><span class="glyph">▦</span><span class="tt-txt">Загрузка команд<span class="tt-sub" id="mxSum"></span></span></div>
+      <button class="iconbtn" id="hcBtn" title="Численность команд" aria-label="Численность команд">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.1"/><path d="M3.6 19c0-3 2.5-5 5.4-5s5.4 2 5.4 5"/><path d="M15.8 5.3a3 3 0 0 1 0 5.6"/><path d="M17.4 14.1c2.1.5 3.5 2.1 3.5 4.7"/></svg>
+      </button>
+    </div>
+    <div class="mxnav mxnav-row">
+      <button class="navbtn" id="mxPrev">‹</button>
+      <div class="mxlabel" id="mxLabel"></div>
+      <button class="navbtn" id="mxNext">›</button>
+      <button class="toolbtn" id="propToggle" title="Показать предложенные (очередь) поверх принятых">+ очередь</button>
+      <button class="toolbtn scn-btn" id="whatifBtn">⚖ Что-если</button>
+    </div>
+    <div class="mxmode-row">
+      <div class="seg-toggle sm" id="mxModeToggle">
+        <button data-mm="tasks" class="on">Задачи</button>
+        <button data-mm="perPerson">На человека</button>
+      </div>
+      <label class="ratebox" id="rateBox"><span>норма зад./чел · мес</span><input type="number" min="1" step="1" inputmode="numeric" id="rateInput" onfocus="this.select()"></label>
+    </div>
+    <div class="scenario-bar" id="scenarioBar" style="display:none"></div>
+    <div class="mxhint" id="mxHint">Ячейка = команда. Число = задачи команд, активных в выбранном месяце · клик по ячейке/заголовку — фильтр по команде. Выбранная команда сразу подсвечивает её инициативы в списке ниже.</div>
+    <div class="mxscroll"><div id="matrix"></div></div>
   </section>
 
   <section class="timeline glass">
@@ -436,7 +579,9 @@
       <div class="tools">
         <button class="toolbtn add" id="addBtn">+ Новая</button>
         <button class="toolbtn" id="exportBtn">⤓ Экспорт</button>
-        <button class="toolbtn" id="resetDataBtn">↺ Исходные</button>
+        <button class="toolbtn" id="importBtn" title="Загрузить данные из файла бэкапа">⤒ Загрузить</button>
+        <input type="file" id="importInput" accept="application/json,.json" style="display:none">
+        <button class="toolbtn" id="logBtn">≡ Журнал</button>
         <div class="zoom" id="zoom">
           <button class="zbtn" data-z="1">1 мес</button>
           <button class="zbtn on" data-z="3">3 мес</button>
@@ -447,10 +592,46 @@
     <div class="inilist" id="inilist"></div>
     <div class="gtip">
       <span class="k"><span class="dotn s"></span> дедлайн ≤ 7 дней</span>
-      <span class="k"><span class="dotn o"></span> постоянная</span>
+      <span class="k"><span class="dotn o"></span> сигнал</span>
       <span class="k">полоса = старт→дедлайн · ✎ — редактировать</span>
     </div>
   </section>
+
+  <div class="modal-overlay" id="hcModal">
+    <div class="modal glass">
+      <div class="modal-h">
+        <div class="modal-title">Численность команд <span class="pill" id="hcSum"></span></div>
+        <button class="modal-x" id="hcClose">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="lognote">Укажите число сотрудников в каждой команде (регион × сегмент). Прочерк — такой команды нет по справочнику. Пока это только справочные данные и в расчёт капасити не идут.</div>
+        <div class="mxscroll"><table id="hcTable" class="hctable"></table></div>
+      </div>
+      <div class="modal-f">
+        <div class="spacer"></div>
+        <button class="save" id="hcCloseBtn">Готово</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="logModal">
+    <div class="modal glass">
+      <div class="modal-h">
+        <div class="modal-title">История изменений <span class="pill" id="logCount"></span></div>
+        <button class="modal-x" id="logClose">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="lognote">Журнал хранится локально в этом браузере и виден только здесь. Чтобы он стал общим для команды и защищённым (с настоящей авторизацией «кто»), нужен бэкенд — это шаг с Supabase.</div>
+        <div id="logList" class="loglist"></div>
+      </div>
+      <div class="modal-f">
+        <button class="del" id="logClear">Очистить</button>
+        <div class="spacer"></div>
+        <button class="ghost" id="logExport">⤓ Экспорт CSV</button>
+        <button class="save" id="logCloseBtn">Готово</button>
+      </div>
+    </div>
+  </div>
 
   <div class="modal-overlay" id="modal">
     <div class="modal glass">
@@ -464,21 +645,34 @@
         <label class="fld"><span class="fl">Ответственный за запуск <span class="req">обязательно</span></span>
           <input type="text" id="fOwner" placeholder="Имя ответственного" maxlength="80"></label>
         <div class="fld2">
-          <label class="fld"><span class="fl">Дата старта</span><input type="date" id="fStart"></label>
-          <label class="fld"><span class="fl">Дата конца (дедлайн)</span><input type="date" id="fEnd"></label>
+          <label class="fld"><span class="fl">Старт</span><input type="date" id="fStart"></label>
+          <label class="fld"><span class="fl">Дедлайн</span><input type="date" id="fEnd"></label>
         </div>
         <div class="fld">
-          <span class="fl">Команды и задачи · регион × сегмент <span class="req">обязательно</span></span>
+          <span class="fl">Команды и задачи · сегмент × регион <span class="req">обязательно</span></span>
+          <div class="quickpick">
+            <div class="qp-lab">Быстрый выбор команд</div>
+            <div class="qp-row"><span class="qp-cap">Сегменты</span><div class="qp-chips" id="qpSegs"></div></div>
+            <div class="qp-row"><span class="qp-cap">Регионы</span><div class="qp-chips" id="qpRegs"></div></div>
+            <button type="button" class="addcell" id="qpAdd">+ Добавить выбранные в таблицу</button>
+            <div class="qp-hint">Выберешь сегменты — регионы подстроятся под правила (недоступные погаснут). Только сегменты → все их регионы; только регионы → все сегменты региона.</div>
+            <div class="qp-msg" id="qpMsg"></div>
+          </div>
           <div id="fCells" class="cellseditor"></div>
-          <button class="addcell" id="addCellBtn">+ Добавить команду</button>
+          <button class="addcell" id="addCellBtn">+ Добавить команду вручную</button>
           <div class="celltot" id="cellTot"></div>
+        </div>
+        <div class="fld" id="statusField">
+          <span class="fl">Статус</span>
+          <div class="qp-chips" id="fStatus"></div>
         </div>
         <div class="fld">
           <span class="fl">Тип инициативы</span>
           <div class="seg-toggle" id="fType">
-            <button data-type="once" class="on">Единичная</button>
-            <button data-type="ongoing">Постоянная</button>
+            <button data-type="once" class="on">Кампания</button>
+            <button data-type="ongoing">Сигнал</button>
           </div>
+          <div id="typeHint" style="font-size:11px;color:var(--muted);margin-top:7px;line-height:1.4"></div>
         </div>
         <div class="mErr" id="mErr"></div>
       </div>
@@ -493,7 +687,7 @@
 
   <section class="ribbon glass">
     <div class="h">
-      <div class="t">Нагрузка по месяцам · задач к дедлайну</div>
+      <div class="t">Нагрузка по месяцам · активных инициатив</div>
       <div class="legend"><span>меньше</span>
         <span class="sw" style="background:var(--h1)"></span>
         <span class="sw" style="background:var(--h2)"></span>
@@ -515,7 +709,7 @@
       <div class="dow"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
       <div class="grid" id="calGrid"></div>
       <div class="calhint">
-        <div class="scale"><span>активных кампаний:</span>
+        <div class="scale"><span>активных инициатив:</span>
           <i style="background:var(--h1)"></i><i style="background:var(--h2)"></i><i style="background:var(--h3)"></i><i style="background:var(--h4)"></i><i style="background:var(--h5)"></i>
           <span>больше →</span>
         </div>
@@ -532,31 +726,58 @@
     </div>
   </section>
 
-  <section class="card glass matrixcard">
-    <div class="sec-h">
-      <div class="tt"><span class="glyph">▦</span> Загрузка команд · регион × сегмент <span class="pill" id="mxSum"></span></div>
-      <div class="mxnav">
-        <button class="navbtn" id="mxPrev">‹</button>
-        <div class="mxlabel" id="mxLabel"></div>
-        <button class="navbtn" id="mxNext">›</button>
-      </div>
-    </div>
-    <div class="mxhint">Ячейка = команда. Число = задачи команд, активных в выбранном месяце · клик по ячейке/заголовку — фильтр по команде.</div>
-    <div class="mxscroll"><div id="matrix"></div></div>
-  </section>
-
   <footer id="footNote">источник: calendar_figma.csv</footer>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const DATA = [{"date": "2026-06-19", "title": "ML: вероятность оттока", "segment": "MICRO", "region": "CEN_KRD", "tasks": 676, "ongoing": false}, {"date": "2026-06-19", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-06-19", "title": "Гарантии: клиент посетил страницу", "segment": "MICRO", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "MICRO", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "CEN_KRD", "tasks": 5, "ongoing": false}, {"date": "2026-06-19", "title": "ML: вероятность оттока", "segment": "MICRO", "region": "NSK_EKT", "tasks": 579, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "NSK_EKT", "tasks": 7, "ongoing": false}, {"date": "2026-06-19", "title": "ML: вероятность оттока", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 980, "ongoing": false}, {"date": "2026-06-19", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 4, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 4, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 8, "ongoing": false}, {"date": "2026-06-19", "title": "ML: вероятность оттока", "segment": "SE", "region": "CEN_KRD", "tasks": 194, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие счетов в RBO/RBM", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-19", "title": "ML: вероятность оттока", "segment": "SE", "region": "NSK_EKT", "tasks": 285, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "SE", "region": "NSK_EKT", "tasks": 5, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие счетов в RBO/RBM", "segment": "SE", "region": "NSK_EKT", "tasks": 3, "ongoing": false}, {"date": "2026-06-19", "title": "Новая связь внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-19", "title": "ML: вероятность оттока", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 362, "ongoing": false}, {"date": "2026-06-19", "title": "Бизнес-карта: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-19", "title": "Гарантии: клиент посетил страницу", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-19", "title": "Закрытие счетов в RBO/RBM", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 2, "ongoing": false}, {"date": "2026-06-19", "title": "ML: вероятность оттока", "segment": "SME", "region": "MSK", "tasks": 69, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "MICRO", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "MICRO", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 13, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "SE", "region": "CEN_KRD", "tasks": 3, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие счетов в RBO/RBM", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие счетов в RBO/RBM", "segment": "SE", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие счетов в RBO/RBM", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 2, "ongoing": false}, {"date": "2026-06-20", "title": "Закрытие счетов в RBO/RBM", "segment": "SME", "region": "MSK", "tasks": 2, "ongoing": false}, {"date": "2026-06-21", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "CEN_KRD", "tasks": 3, "ongoing": false}, {"date": "2026-06-21", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "NSK_EKT", "tasks": 6, "ongoing": false}, {"date": "2026-06-21", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 5, "ongoing": false}, {"date": "2026-06-21", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 9, "ongoing": false}, {"date": "2026-06-21", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-21", "title": "Закрытие счетов в RBO/RBM", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-22", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "CEN_KRD", "tasks": 3, "ongoing": false}, {"date": "2026-06-22", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 5, "ongoing": false}, {"date": "2026-06-22", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "NSK_EKT", "tasks": 6, "ongoing": false}, {"date": "2026-06-22", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 7, "ongoing": false}, {"date": "2026-06-22", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 2, "ongoing": false}, {"date": "2026-06-22", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-22", "title": "Закрытие счетов в RBO/RBM", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 9, "ongoing": false}, {"date": "2026-06-22", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 7, "ongoing": false}, {"date": "2026-06-22", "title": "Новый клиент внутри группы", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-22", "title": "Бизнес-карта: интерес клиента", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-22", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-22", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 4, "ongoing": false}, {"date": "2026-06-22", "title": "Бизнес-карта: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-22", "title": "Закрытие валютных счетов в RBO/RBM", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-22", "title": "Закрытие счетов в RBO/RBM", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 4, "ongoing": false}, {"date": "2026-06-22", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-23", "title": "1С Интеграции: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-06-23", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 5, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 5, "ongoing": false}, {"date": "2026-06-23", "title": "Интернет-Эквайринг: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 3, "ongoing": false}, {"date": "2026-06-23", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-06-23", "title": "СБП В2В: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "1С Интеграции: интерес клиента", "segment": "MICRO", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "MICRO", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-06-23", "title": "Интернет-Эквайринг: интерес клиента", "segment": "MICRO", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-06-23", "title": "СБП C2B QR: интерес клиента", "segment": "MICRO", "region": "NSK_EKT", "tasks": 3, "ongoing": false}, {"date": "2026-06-23", "title": "СБП В2В: интерес клиента", "segment": "MICRO", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "1С Интеграции: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 4, "ongoing": false}, {"date": "2026-06-23", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 4, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 10, "ongoing": false}, {"date": "2026-06-23", "title": "Интернет-Эквайринг: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 5, "ongoing": false}, {"date": "2026-06-23", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 2, "ongoing": false}, {"date": "2026-06-23", "title": "СБП C2B QR: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 5, "ongoing": false}, {"date": "2026-06-23", "title": "СБП В2В: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "MIDMARKET", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "MIDMARKET", "region": "MSK", "tasks": 10, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "MIDMARKET", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-06-23", "title": "СБП C2B QR: интерес клиента", "segment": "MIDMARKET", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "MIDMARKET", "region": "SPB_NNV", "tasks": 18, "ongoing": false}, {"date": "2026-06-23", "title": "СБП C2B QR: интерес клиента", "segment": "MIDMARKET", "region": "SPB_NNV", "tasks": 3, "ongoing": false}, {"date": "2026-06-23", "title": "Бизнес-карта: интерес клиента", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "SE", "region": "CEN_KRD", "tasks": 4, "ongoing": false}, {"date": "2026-06-23", "title": "СБП C2B QR: интерес клиента", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "1С Интеграции: интерес клиента", "segment": "SE", "region": "NSK_EKT", "tasks": 4, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "SE", "region": "NSK_EKT", "tasks": 7, "ongoing": false}, {"date": "2026-06-23", "title": "Интернет-Эквайринг: интерес клиента", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "СБП В2В: интерес клиента", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "1С Интеграции: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 6, "ongoing": false}, {"date": "2026-06-23", "title": "Зарплатный проект: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 20, "ongoing": false}, {"date": "2026-06-23", "title": "Интернет-Эквайринг: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 4, "ongoing": false}, {"date": "2026-06-23", "title": "СБП C2B QR: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "СБП В2В: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "Интернет-Эквайринг: интерес клиента", "segment": "SME", "region": "MSK", "tasks": 1, "ongoing": false}, {"date": "2026-06-23", "title": "СБП C2B QR: интерес клиента", "segment": "SME", "region": "MSK", "tasks": 2, "ongoing": false}, {"date": "2026-06-24", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 4, "ongoing": false}, {"date": "2026-06-24", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-06-24", "title": "СБП C2B QR: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-06-24", "title": "СБП В2В: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 3, "ongoing": false}, {"date": "2026-06-24", "title": "1С Интеграции: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 4, "ongoing": false}, {"date": "2026-06-24", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-24", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-24", "title": "1С Интеграции: интерес клиента", "segment": "MIDMARKET", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "СБП C2B QR: интерес клиента", "segment": "MIDMARKET", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "Зарплатный проект: интерес клиента", "segment": "MIDMARKET", "region": "SPB_NNV", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "1С Интеграции: интерес клиента", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "Зарплатный проект: интерес клиента", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "1С Интеграции: интерес клиента", "segment": "SE", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-06-24", "title": "Бизнес-карта: интерес клиента", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-06-24", "title": "1С Интеграции: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "Бизнес-карта: интерес клиента", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-06-24", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-24", "title": "Бизнес-карта: интерес клиента", "segment": "SME", "region": "MSK", "tasks": 3, "ongoing": false}, {"date": "2026-06-25", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-06-25", "title": "1С Интеграции: интерес клиента", "segment": "MICRO", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-25", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-25", "title": "Бизнес-карта: интерес клиента", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-06-25", "title": "Зарплатный проект: интерес клиента", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-25", "title": "Интернет-Эквайринг: интерес клиента", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-06-29", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 18, "ongoing": false}, {"date": "2026-06-29", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 5, "ongoing": false}, {"date": "2026-06-29", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 21, "ongoing": false}, {"date": "2026-06-29", "title": "Новый клиент внутри группы", "segment": "SE", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-06-29", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 5, "ongoing": false}, {"date": "2026-06-29", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 6, "ongoing": false}, {"date": "2026-06-29", "title": "Новый клиент внутри группы", "segment": "SME", "region": "MSK", "tasks": 2, "ongoing": false}, {"date": "2026-06-30", "title": "ТA: Больше чем зарплата", "segment": "LARGE", "region": "NSK_EKT", "tasks": 60, "ongoing": false}, {"date": "2026-06-30", "title": "ТA: Больше чем зарплата", "segment": "LARGE", "region": "SPB_NNV", "tasks": 2, "ongoing": false}, {"date": "2026-06-30", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-06-30", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 7, "ongoing": false}, {"date": "2026-06-30", "title": "Знакомство с клиентами ресегментации MM-SME", "segment": "MIDMARKET", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-06-30", "title": "ТA: Больше чем зарплата", "segment": "MIDMARKET", "region": "NSK_EKT", "tasks": 254, "ongoing": false}, {"date": "2026-06-30", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-07-01", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 3, "ongoing": false}, {"date": "2026-07-01", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 3, "ongoing": false}, {"date": "2026-07-01", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 2, "ongoing": false}, {"date": "2026-07-01", "title": "Новый клиент внутри группы", "segment": "SME", "region": "MSK", "tasks": 1, "ongoing": false}, {"date": "2026-07-03", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 6, "ongoing": false}, {"date": "2026-07-03", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 6, "ongoing": false}, {"date": "2026-07-03", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 8, "ongoing": false}, {"date": "2026-07-03", "title": "Новый клиент внутри группы", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-07-03", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 3, "ongoing": false}, {"date": "2026-07-03", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 8, "ongoing": false}, {"date": "2026-07-06", "title": "ML: вероятность оттока", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-07-06", "title": "Новая связь внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-07-06", "title": "Новый клиент внутри группы", "segment": "SME", "region": "MSK", "tasks": 1, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "LARGE", "region": "MSK", "tasks": 3, "ongoing": false}, {"date": "2026-07-07", "title": "ML: вероятность оттока", "segment": "MICRO", "region": "CEN_KRD", "tasks": 346, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 609, "ongoing": false}, {"date": "2026-07-07", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 4, "ongoing": false}, {"date": "2026-07-07", "title": "ML: вероятность оттока", "segment": "MICRO", "region": "NSK_EKT", "tasks": 402, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 627, "ongoing": false}, {"date": "2026-07-07", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 12, "ongoing": false}, {"date": "2026-07-07", "title": "ML: вероятность оттока", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 720, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 1209, "ongoing": false}, {"date": "2026-07-07", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 16, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "MIDMARKET", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-07-07", "title": "ML: вероятность оттока", "segment": "SE", "region": "CEN_KRD", "tasks": 131, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "SE", "region": "CEN_KRD", "tasks": 388, "ongoing": false}, {"date": "2026-07-07", "title": "Новый клиент внутри группы", "segment": "SE", "region": "CEN_KRD", "tasks": 3, "ongoing": false}, {"date": "2026-07-07", "title": "ML: вероятность оттока", "segment": "SE", "region": "NSK_EKT", "tasks": 201, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 380, "ongoing": false}, {"date": "2026-07-07", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-07-07", "title": "ML: вероятность оттока", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 166, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 835, "ongoing": false}, {"date": "2026-07-07", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 5, "ongoing": false}, {"date": "2026-07-07", "title": "ML: вероятность оттока", "segment": "SME", "region": "MSK", "tasks": 51, "ongoing": false}, {"date": "2026-07-07", "title": "Новая связь внутри группы", "segment": "SME", "region": "MSK", "tasks": 70, "ongoing": false}, {"date": "2026-07-07", "title": "Новый клиент внутри группы", "segment": "SME", "region": "MSK", "tasks": 1, "ongoing": false}, {"date": "2026-07-08", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-07-08", "title": "Снижение GI/пассивов", "segment": "MICRO", "region": "CEN_KRD", "tasks": 69, "ongoing": false}, {"date": "2026-07-08", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-07-08", "title": "Снижение GI/пассивов", "segment": "MICRO", "region": "NSK_EKT", "tasks": 76, "ongoing": false}, {"date": "2026-07-08", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 2, "ongoing": false}, {"date": "2026-07-08", "title": "Снижение GI/пассивов", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 306, "ongoing": false}, {"date": "2026-07-08", "title": "Снижение GI/пассивов", "segment": "SE", "region": "CEN_KRD", "tasks": 40, "ongoing": false}, {"date": "2026-07-08", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-07-08", "title": "Снижение GI/пассивов", "segment": "SE", "region": "NSK_EKT", "tasks": 46, "ongoing": false}, {"date": "2026-07-08", "title": "Снижение GI/пассивов", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 208, "ongoing": false}, {"date": "2026-07-08", "title": "Снижение GI/пассивов", "segment": "SME", "region": "MSK", "tasks": 19, "ongoing": false}, {"date": "2026-07-09", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 2, "ongoing": false}, {"date": "2026-07-09", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 3, "ongoing": false}, {"date": "2026-07-09", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-07-09", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-07-09", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-07-13", "title": "Новый клиент внутри группы", "segment": "LARGE", "region": "MSK", "tasks": 1, "ongoing": false}, {"date": "2026-07-13", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 7, "ongoing": false}, {"date": "2026-07-13", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 6, "ongoing": false}, {"date": "2026-07-13", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 6, "ongoing": false}, {"date": "2026-07-13", "title": "Новый клиент внутри группы", "segment": "SE", "region": "CEN_KRD", "tasks": 3, "ongoing": false}, {"date": "2026-07-13", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1, "ongoing": false}, {"date": "2026-07-16", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 6, "ongoing": false}, {"date": "2026-07-16", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 3, "ongoing": false}, {"date": "2026-07-16", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 9, "ongoing": false}, {"date": "2026-07-16", "title": "Новый клиент внутри группы", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-07-16", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 3, "ongoing": false}, {"date": "2026-07-16", "title": "Новый клиент внутри группы", "segment": "SME", "region": "MSK", "tasks": 1, "ongoing": false}, {"date": "2026-07-17", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-07-17", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "NSK_EKT", "tasks": 2, "ongoing": false}, {"date": "2026-07-17", "title": "Новый клиент внутри группы", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 3, "ongoing": false}, {"date": "2026-07-17", "title": "Новый клиент внутри группы", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-07-17", "title": "Новый клиент внутри группы", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 2, "ongoing": false}, {"date": "2026-07-17", "title": "Новый клиент внутри группы", "segment": "SME", "region": "MSK", "tasks": 2, "ongoing": false}, {"date": "2026-07-19", "title": "Заявка на РКО", "segment": "MICRO", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-07-30", "title": "NTB Потенциал по гарантиям в рамках госзакупок", "segment": "SE", "region": "CEN_KRD", "tasks": 246, "ongoing": false}, {"date": "2026-07-30", "title": "NTB Потенциал по гарантиям в рамках госзакупок", "segment": "SE", "region": "NSK_EKT", "tasks": 521, "ongoing": false}, {"date": "2026-07-30", "title": "NTB Потенциал по гарантиям в рамках госзакупок", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 611, "ongoing": false}, {"date": "2026-08-02", "title": "Заявка на РКО", "segment": "MICRO", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-08-03", "title": "ML: вероятность оттока", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-08-30", "title": "ТA: Больше чем зарплата", "segment": "INTERNATIONAL", "region": "MSK", "tasks": 2, "ongoing": false}, {"date": "2026-08-30", "title": "ТA: Больше чем зарплата", "segment": "INTERNATIONAL", "region": "NSK_EKT", "tasks": 63, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "LARGE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-08-30", "title": "ТA: Больше чем зарплата", "segment": "LARGE", "region": "MSK", "tasks": 2, "ongoing": false}, {"date": "2026-08-30", "title": "ТA: Больше чем зарплата", "segment": "LARGE", "region": "NSK_EKT", "tasks": 109, "ongoing": false}, {"date": "2026-08-30", "title": "ТA: Больше чем зарплата", "segment": "LARGE", "region": "SPB_NNV", "tasks": 1, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "MICRO", "region": "CEN_KRD", "tasks": 391, "ongoing": false}, {"date": "2026-08-30", "title": "Мягкие валюты", "segment": "MICRO", "region": "CEN_KRD", "tasks": 41, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "MICRO", "region": "NSK_EKT", "tasks": 384, "ongoing": false}, {"date": "2026-08-30", "title": "Мягкие валюты", "segment": "MICRO", "region": "NSK_EKT", "tasks": 19, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 1410, "ongoing": false}, {"date": "2026-08-30", "title": "Мягкие валюты", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 90, "ongoing": false}, {"date": "2026-08-30", "title": "ТA: Больше чем зарплата", "segment": "MIDMARKET", "region": "NSK_EKT", "tasks": 458, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "PRODUCT", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "PRODUCT", "region": "MSK", "tasks": 1, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "SE", "region": "CEN_KRD", "tasks": 349, "ongoing": false}, {"date": "2026-08-30", "title": "Мягкие валюты", "segment": "SE", "region": "CEN_KRD", "tasks": 62, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "SE", "region": "MSK", "tasks": 3, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "SE", "region": "NSK_EKT", "tasks": 340, "ongoing": false}, {"date": "2026-08-30", "title": "Мягкие валюты", "segment": "SE", "region": "NSK_EKT", "tasks": 72, "ongoing": false}, {"date": "2026-08-30", "title": "ТA: Больше чем зарплата", "segment": "SE", "region": "NSK_EKT", "tasks": 1, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 1236, "ongoing": false}, {"date": "2026-08-30", "title": "Мягкие валюты", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 342, "ongoing": false}, {"date": "2026-08-30", "title": "Импорт SME 2026", "segment": "SME", "region": "MSK", "tasks": 88, "ongoing": false}, {"date": "2026-08-30", "title": "Мягкие валюты", "segment": "SME", "region": "MSK", "tasks": 8, "ongoing": false}, {"date": "2026-09-01", "title": "ФЛ с ЕИО_фев26", "segment": "SE", "region": "CEN_KRD", "tasks": 1, "ongoing": false}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "INTERNATIONAL", "region": "CEN_KRD", "tasks": 10, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "INTERNATIONAL", "region": "MSK", "tasks": 229, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "INTERNATIONAL", "region": "NSK_EKT", "tasks": 9, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "INTERNATIONAL", "region": "SPB_NNV", "tasks": 46, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "LARGE", "region": "CEN_KRD", "tasks": 100, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "LARGE", "region": "MSK", "tasks": 376, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "LARGE", "region": "NSK_EKT", "tasks": 85, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "LARGE", "region": "SPB_NNV", "tasks": 169, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "MICRO", "region": "CEN_KRD", "tasks": 7, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "MICRO", "region": "NSK_EKT", "tasks": 2, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "MICRO", "region": "UNITED_CAPITALS", "tasks": 13, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "MIDMARKET", "region": "CEN_KRD", "tasks": 118, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "MIDMARKET", "region": "MSK", "tasks": 400, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "MIDMARKET", "region": "NSK_EKT", "tasks": 84, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "MIDMARKET", "region": "SPB_NNV", "tasks": 157, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "PRODUCT", "region": "MSK", "tasks": 6, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "PRODUCT", "region": "NSK_EKT", "tasks": 1, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "SE", "region": "CEN_KRD", "tasks": 8, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "SE", "region": "NSK_EKT", "tasks": 23, "ongoing": true}, {"date": "2027-12-31", "title": "Рекомендация по факторингу без регресса", "segment": "SE", "region": "UNITED_CAPITALS", "tasks": 90, "ongoing": true}];
-const TODAY = new Date(2026,5,18); TODAY.setHours(0,0,0,0);
+const TODAY = new Date(); TODAY.setHours(0,0,0,0); // всегда фактическая текущая дата
 const DAY=86400000;
 const MONTHS_RU=["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
 const MONTHS_SHORT=["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
 
-const REGIONS=[...new Set(DATA.map(d=>d.region))].sort();
-const SEGMENTS=["MICRO","SE","SME","MIDMARKET","LARGE","INTERNATIONAL","PRODUCT"].filter(s=>DATA.some(d=>d.segment===s));
+// --- Справочник (master-data): названия сегментов/регионов + зависимость регион×сегмент ---
+// Соответствие старых кодов выгрузки новым названиям (для миграции исходных данных и localStorage).
+// SME и PRODUCT исключены из справочника — строки с ними отбрасываются.
+const SEG_MAP={MICRO:"Микро",SE:"Малый",MIDMARKET:"Средний",LARGE:"Крупный",INTERNATIONAL:"Международный"};
+const REG_MAP={MSK:"Москва",SPB_NNV:"Запад",CEN_KRD:"Центр",NSK_EKT:"СибУрал",UNITED_CAPITALS:"Объединенные столицы"};
+
+const SEGMENTS=["Крупный","Средний","Международный","Финансовые институты","Малый","Микро"];
+const REGIONS=["Москва","Запад","Центр","СибУрал","Объединенные столицы"];
+// Короткие подписи регионов для таблицы капасити (графическое сокращение по правилам русского языка)
+const REG_SHORT={"Объединенные столицы":"Объед. столицы"};
+function regShort(r){return REG_SHORT[r]||r;}
+// Зависимость: какие сегменты допустимы в каждом регионе.
+// «Финансовые институты» — только Москва. Крупный/Средний/Международный — везде, кроме Объединённых столиц.
+// Малый/Микро — Центр, СибУрал и Объединённые столицы.
+const SEG_BIG=["Крупный","Средний","Международный"]; // без «Финансовых институтов»
+const ALLOWED={
+  "Москва":new Set([...SEG_BIG,"Финансовые институты"]),
+  "Запад":new Set(SEG_BIG),
+  "Центр":new Set([...SEG_BIG,"Малый","Микро"]),
+  "СибУрал":new Set([...SEG_BIG,"Малый","Микро"]),
+  "Объединенные столицы":new Set(["Малый","Микро"]),
+};
+function isAllowed(region,segment){const a=ALLOWED[region];return !!(a&&a.has(segment));}
+function segmentsFor(region){return SEGMENTS.filter(s=>isAllowed(region,s));}
+function regionsFor(segment){return REGIONS.filter(r=>isAllowed(r,segment));}
+// статусы инициатив
+const STATUSES=["предложена","принята","отклонена"];
+const STATUS_META={"предложена":{l:"Предложена",c:"st-prop"},"принята":{l:"Принята",c:"st-acc"},"отклонена":{l:"Отклонена",c:"st-rej"},"завершена":{l:"Завершена",c:"st-done"},"отложена":{l:"Отложена",c:"st-hold"}};
+const DEFAULT_STATUS="принята";   // для сидовых/старых данных без статуса (уже в плане)
+const NEW_STATUS="предложена";    // новая инициатива всегда стартует как предложение
+function normStatus(s){return STATUSES.includes(s)?s:DEFAULT_STATUS;}
+function statusLabel(s){return (STATUS_META[s]||STATUS_META[DEFAULT_STATUS]).l;}
+
+// Миграция исходной выгрузки на месте: переименовать регионы/сегменты, выбросить SME/PRODUCT
+// и команды, недопустимые по справочнику.
+for(let i=DATA.length-1;i>=0;i--){
+  const d=DATA[i];
+  const seg=SEG_MAP[d.segment], reg=REG_MAP[d.region]||d.region;
+  if(!seg||!isAllowed(reg,seg)){DATA.splice(i,1);continue;}
+  d.segment=seg; d.region=reg;
+}
 const TITLES=[...new Set(DATA.map(d=>d.title))].sort((a,b)=>a.localeCompare(b,'ru'));
 
 // Дедупликация: одинаковые инициативы (название+регион+сегмент) — оставляем одну с самым далёким дедлайном
@@ -568,7 +789,8 @@ function dedupeFarthest(rows){
 const RAW_COUNT=DATA.length, RAW_TASKS=DATA.reduce((s,r)=>s+r.tasks,0);
 const DDATA=dedupeFarthest(DATA);
 const REMOVED=RAW_COUNT-DDATA.length;
-const TODAY_ISO="2026-06-18";
+const TODAY_ISO=TODAY.getFullYear()+"-"+String(TODAY.getMonth()+1).padStart(2,"0")+"-"+String(TODAY.getDate()).padStart(2,"0"); // «сегодня» (дефолт для новой инициативы)
+const START_ISO="2026-06-18"; // общая дата старта засеянных инициатив (фиксированная, не зависит от «сегодня»)
 
 // Редактируемая модель: одна инициатива на название (Total Bank), со своими start/end/командами/задачами/типом
 let UID=0;
@@ -576,12 +798,12 @@ function buildSeed(){
   const m={};
   DDATA.forEach(r=>{
     let o=m[r.title];
-    if(!o)o=m[r.title]={title:r.title,owner:"",start:TODAY_ISO,end:r.date,cells:[],ongoing:false};
+    if(!o)o=m[r.title]={title:r.title,owner:"",start:START_ISO,end:r.date,cells:[],ongoing:false};
     if(r.date>o.end)o.end=r.date;
     o.cells.push({region:r.region,segment:r.segment,tasks:r.tasks});
     o.ongoing=o.ongoing||r.ongoing;
   });
-  return Object.values(m).map(o=>({id:"i"+(UID++),title:o.title,owner:o.owner,start:o.start,end:o.end,cells:o.cells,ongoing:o.ongoing}));
+  return Object.values(m).map(o=>({id:"i"+(UID++),title:o.title,owner:o.owner,start:o.start,end:o.end,cells:o.cells,ongoing:o.ongoing,status:DEFAULT_STATUS}));
 }
 let INITIATIVES=buildSeed();
 
@@ -589,21 +811,178 @@ let INITIATIVES=buildSeed();
 const LS_KEY="salescal_initiatives_v1";
 function saveLS(){try{localStorage.setItem(LS_KEY,JSON.stringify(INITIATIVES));}catch(e){}}
 function loadLS(){try{const s=localStorage.getItem(LS_KEY);if(s){const a=JSON.parse(s);if(Array.isArray(a)&&a.length)return a;}}catch(e){}return null;}
+
+// --- журнал изменений (локальный; интерфейс готов к переносу на Supabase) ---
+const LOG_KEY="salescal_log_v1", SESSION_KEY="salescal_session_v1", USERS_KEY="salescal_users_v1";
+let LOG=(()=>{try{const s=localStorage.getItem(LOG_KEY);if(s){const a=JSON.parse(s);if(Array.isArray(a))return a;}}catch(e){}return[];})();
+let currentUser=(()=>{try{return localStorage.getItem(SESSION_KEY)||"";}catch(e){return"";}})();
+function saveLog(){try{LOG=LOG.slice(-500);localStorage.setItem(LOG_KEY,JSON.stringify(LOG));}catch(e){}}
+// ============ Supabase: общая база команды ============
+const SB_URL="https://lpwghsnawygukloustjh.supabase.co";
+const SB_KEY="sb_publishable_m1zf80frHBqQSfGr8DW5Eg_-VpM3nkn";
+const sb=(typeof window!=="undefined"&&window.supabase&&window.supabase.createClient)?window.supabase.createClient(SB_URL,SB_KEY):null;
+const LOCAL_MODE=false;   // false = общая база Supabase со входом; true = локально без входа
+let appStarted=false, authMode="signin";
+
+function rowToInit(r){return {id:r.id,title:r.title,owner:r.owner||"",start:r.start_date,end:r.end_date,ongoing:!!r.ongoing,status:normStatus(r.status),cells:Array.isArray(r.cells)?r.cells:[]};}
+function initToRow(o){return {title:o.title,owner:o.owner||"",start_date:o.start,end_date:o.end,ongoing:!!o.ongoing,status:normStatus(o.status),cells:o.cells||[]};}
+
+async function dbLoadAll(){
+  if(!sb)return;
+  try{
+    const [ini,hc,st,lg]=await Promise.all([
+      sb.from("initiatives").select("*"),
+      sb.from("headcount").select("*"),
+      sb.from("app_settings").select("*"),
+      sb.from("change_log").select("*").order("ts",{ascending:false}).limit(300)
+    ]);
+    if(ini.error)throw ini.error;
+    INITIATIVES=(ini.data||[]).map(rowToInit);
+    HEADCOUNT={};(hc.data||[]).forEach(r=>{const n=+r.people||0;if(n>0)HEADCOUNT[r.region+"|"+r.segment]=n;});
+    const rr=(st.data||[]).find(x=>x.key==="rate");if(rr){const v=Number(rr.value);if(v>0)RATE=v;}
+    LOG=(lg.data||[]).map(r=>({ts:Date.parse(r.ts)||Date.now(),user:r.user_email||"—",action:r.action||"",title:(r.details&&r.details.title)||"",id:(r.details&&r.details.id)||null,details:(r.details&&r.details.lines)||[]})).reverse();
+    updateHcSum();applyMxModeUI();
+  }catch(e){console.error("dbLoadAll",e);flash("Ошибка загрузки из базы: "+(e.message||e),true);}
+}
+async function dbInsertInit(o){const {data,error}=await sb.from("initiatives").insert(initToRow(o)).select().single();if(error)throw error;return data;}
+async function dbUpdateInit(id,o){const {error}=await sb.from("initiatives").update(initToRow(o)).eq("id",id);if(error)throw error;}
+async function dbDeleteInit(id){const {error}=await sb.from("initiatives").delete().eq("id",id);if(error)throw error;}
+async function dbSetHeadcount(region,segment,n){if(!sb||LOCAL_MODE)return;try{if(n>0){await sb.from("headcount").upsert({region,segment,people:n,updated_at:new Date().toISOString()},{onConflict:"region,segment"});}else{await sb.from("headcount").delete().eq("region",region).eq("segment",segment);}}catch(e){console.error("hc",e);}}
+async function dbSetRate(n){if(!sb||LOCAL_MODE)return;try{await sb.from("app_settings").upsert({key:"rate",value:n},{onConflict:"key"});}catch(e){console.error("rate",e);}}
+function dbLog(action,title,lines,id){if(!sb||LOCAL_MODE)return;sb.from("change_log").insert({user_email:currentUser||null,action,details:{title,id:id||null,lines:lines||[]}}).then(r=>{if(r.error)console.error("log",r.error);});}
+
+let reloadT=null;
+function dbReloadSoon(){if(reloadT)clearTimeout(reloadT);reloadT=setTimeout(()=>{dbLoadAll().then(()=>{renderAll();const lm=document.getElementById("logModal");if(lm&&!lm.classList.contains("hidden")&&typeof renderLog==="function")renderLog();});},300);}
+function dbSubscribe(){
+  if(!sb)return;
+  sb.channel("salescal")
+    .on("postgres_changes",{event:"*",schema:"public",table:"initiatives"},dbReloadSoon)
+    .on("postgres_changes",{event:"*",schema:"public",table:"headcount"},dbReloadSoon)
+    .on("postgres_changes",{event:"*",schema:"public",table:"app_settings"},dbReloadSoon)
+    .subscribe();
+}
+async function dbMaybeMigrate(){
+  if(!sb)return;
+  try{
+    const {count,error}=await sb.from("initiatives").select("id",{count:"exact",head:true});
+    if(error)throw error;
+    if((count||0)>0)return;
+    const local=loadLS();
+    if(!local||!local.length)return;
+    if(!window.confirm("В базе пока нет инициатив, а в этом браузере сохранён план ("+local.length+" инициатив). Перенести его в общую базу?"))return;
+    const rows=normalizeInits(local).map(initToRow);
+    if(rows.length){const {error:e2}=await sb.from("initiatives").insert(rows);if(e2)throw e2;}
+    const hcRows=Object.keys(HEADCOUNT).map(k=>{const[region,segment]=k.split("|");return {region,segment,people:+HEADCOUNT[k]||0};}).filter(x=>x.people>0);
+    if(hcRows.length)await sb.from("headcount").upsert(hcRows,{onConflict:"region,segment"});
+    await dbSetRate(RATE);
+    flash("Данные перенесены в базу");
+  }catch(e){console.error("migrate",e);flash("Не удалось перенести данные: "+(e.message||e),true);}
+}
+
+// ============ Авторизация (Supabase Auth) ============
+function ensureUser(){return currentUser||"—";}
+async function doAuth(){
+  const email=document.getElementById("authName").value.trim();
+  const pass=document.getElementById("authPass").value;
+  const err=document.getElementById("authErr");
+  if(!email||!pass){err.textContent="Укажите эл. почту и пароль.";return;}
+  if(!sb){err.textContent="Нет соединения с базой (не загрузился клиент Supabase).";return;}
+  err.textContent="Подождите…";
+  try{
+    let res;
+    if(authMode==="signup"){
+      const name=document.getElementById("authNick").value.trim();
+      if(!name){err.textContent="Укажите имя.";return;}
+      res=await sb.auth.signUp({email,password:pass,options:{data:{name}}});
+    }
+    else res=await sb.auth.signInWithPassword({email,password:pass});
+    if(res.error){err.textContent=authErrMsg(res.error.message||"");return;}
+    if(authMode==="signup"&&res.data&&!res.data.session){err.textContent="Аккаунт создан. Если включено подтверждение почты — подтвердите по ссылке из письма, затем войдите.";authMode="signin";updateAuthMode();return;}
+    err.textContent="";document.getElementById("authPass").value="";
+  }catch(e){err.textContent="Ошибка: "+(e.message||e);}
+}
+function authErrMsg(m){
+  if(/Invalid login/i.test(m))return "Неверная почта или пароль. Нет аккаунта — нажмите «Регистрация».";
+  if(/already registered/i.test(m))return "Эта почта уже зарегистрирована — войдите.";
+  if(/at least 6|Password should/i.test(m))return "Пароль слишком короткий (минимум 6 символов).";
+  if(/valid email|invalid format/i.test(m))return "Похоже, почта указана некорректно.";
+  return m||"Не удалось войти.";
+}
+function updateAuthMode(){
+  const b=document.getElementById("authBtn");if(b)b.textContent=authMode==="signup"?"Зарегистрироваться":"Войти";
+  const t=document.getElementById("authToggle");if(t)t.textContent=authMode==="signup"?"Уже есть аккаунт? Войти":"Нет аккаунта? Регистрация";
+  const nf=document.getElementById("nameField");if(nf)nf.style.display=authMode==="signup"?"":"none";
+}
+async function logout(){if(sb){try{await sb.auth.signOut();}catch(e){}}document.getElementById("authPass").value="";}
+function showAuth(){document.getElementById("authScreen").classList.remove("hidden");const n=document.getElementById("authName");if(n)setTimeout(()=>n.focus(),40);}
+function hideAuth(){document.getElementById("authScreen").classList.add("hidden");}
+function updateUserBox(){const n=document.getElementById("userName");if(n)n.textContent=currentUser||"—";}
+
+// --- численность команд (пока только хранение, в расчёт капасити не идёт) ---
+const HC_KEY="salescal_headcount_v1";
+let HEADCOUNT=(()=>{try{return JSON.parse(localStorage.getItem(HC_KEY))||{};}catch(e){return{};}})();
+function saveHeadcount(){try{localStorage.setItem(HC_KEY,JSON.stringify(HEADCOUNT));}catch(e){}}
+function hcGet(r,s){const v=HEADCOUNT[r+"|"+s];return(v===undefined||v===null)?"":v;}
+function hcSet(r,s,val){const k=r+"|"+s;const n=Math.round(+val||0);if(val===""||isNaN(+val)||n<=0){delete HEADCOUNT[k];}else{HEADCOUNT[k]=n;}saveHeadcount();updateHcSum();}
+function updateHcSum(){const tot=Object.values(HEADCOUNT).reduce((a,b)=>a+(+b||0),0);const el=document.getElementById("hcSum");if(el)el.textContent=tot?("· всего "+tot):"";}
+// --- настройки: норма задач на человека в месяц + режим матрицы ---
+const SET_KEY="salescal_settings_v1";
+let SETTINGS=(()=>{try{return JSON.parse(localStorage.getItem(SET_KEY))||{};}catch(e){return{};}})();
+function saveSettings(){try{localStorage.setItem(SET_KEY,JSON.stringify(SETTINGS));}catch(e){}}
+let RATE=Number(SETTINGS.rate)>0?Number(SETTINGS.rate):100;   // задач на человека в месяц (норма)
+function hcSum(region,segment){ // сумма численности: по строке/столбцу/ячейке среди допустимых команд
+  let s=0;REGIONS.forEach(r=>{if(region&&r!==region)return;SEGMENTS.forEach(g=>{if(segment&&g!==segment)return;if(!isAllowed(r,g))return;s+=(+HEADCOUNT[r+"|"+g]||0);});});return s;
+}
+function renderHeadcount(){
+  let html="<thead><tr><th></th>"+SEGMENTS.map(s=>`<th class="cseg">${s}</th>`).join("")+"</tr></thead><tbody>";
+  REGIONS.forEach(r=>{
+    html+=`<tr><th class="creg" title="${r}">${regShort(r)}</th>`;
+    SEGMENTS.forEach(s=>{
+      if(!isAllowed(r,s)){html+=`<td class="na">—</td>`;return;}
+      html+=`<td><input type="number" min="0" step="1" inputmode="numeric" class="hcinput" data-r="${r}" data-s="${s}" value="${hcGet(r,s)}" placeholder="0" onfocus="this.select()"></td>`;
+    });
+    html+="</tr>";
+  });
+  html+="</tbody>";
+  const t=document.getElementById("hcTable");t.innerHTML=html;
+  t.querySelectorAll(".hcinput").forEach(inp=>{inp.oninput=()=>hcSet(inp.dataset.r,inp.dataset.s,inp.value);inp.onchange=()=>{const n=Math.round(+inp.value||0);dbSetHeadcount(inp.dataset.r,inp.dataset.s,n>0?n:0);};});
+  updateHcSum();
+}
+function openHeadcount(){renderHeadcount();document.getElementById("hcModal").classList.add("open");}
+function closeHeadcount(){document.getElementById("hcModal").classList.remove("open");}
+function logChange(action,title,details,id){LOG.push({ts:Date.now(),user:currentUser||"—",action,title,id:id||null,details:details||[]});if(LOCAL_MODE)saveLog();else dbLog(action,title,details||[],id);}
+function fmtDateTime(ts){const d=new Date(ts),p=n=>String(n).padStart(2,"0");return p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear()+" "+p(d.getHours())+":"+p(d.getMinutes());}
+function snapInit(it){return it?{title:it.title,owner:it.owner||"",start:it.start,end:it.end,ongoing:!!it.ongoing,status:normStatus(it.status),cells:(it.cells||[]).map(c=>({region:c.region,segment:c.segment,tasks:c.tasks}))}:null;}
+function diffInit(b,a){
+  const out=[];
+  if(b.title!==a.title)out.push(`название: «${b.title}» → «${a.title}»`);
+  if((b.owner||"")!==(a.owner||""))out.push(`ответственный: ${b.owner||"—"} → ${a.owner||"—"}`);
+  if(b.start!==a.start)out.push(`старт: ${fmtDate(b.start)} → ${fmtDate(a.start)}`);
+  if(b.end!==a.end)out.push(`дедлайн: ${fmtDate(b.end)} → ${fmtDate(a.end)}`);
+  if(b.ongoing!==a.ongoing)out.push(`тип: ${b.ongoing?"сигнал":"кампания"} → ${a.ongoing?"сигнал":"кампания"}`);
+  if((b.status||"")!==(a.status||""))out.push(`статус: ${statusLabel(b.status)} → ${statusLabel(a.status)}`);
+  const mb={},ma={};(b.cells||[]).forEach(c=>mb[c.region+"·"+c.segment]=c.tasks);(a.cells||[]).forEach(c=>ma[c.region+"·"+c.segment]=c.tasks);
+  Object.keys(ma).forEach(k=>{if(!(k in mb))out.push(`+ команда ${k} (${ma[k]} зад.)`);else if(mb[k]!==ma[k])out.push(`задачи ${k}: ${mb[k]} → ${ma[k]}`);});
+  Object.keys(mb).forEach(k=>{if(!(k in ma))out.push(`− команда ${k}`);});
+  return out;
+}
+function escHtml(s){return String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
 function syncUID(){let mx=0;INITIATIVES.forEach(x=>{const n=parseInt(String(x.id).replace(/\D/g,""));if(!isNaN(n)&&n>=mx)mx=n+1;});UID=mx;}
 function normalizeInits(arr){
   arr.forEach(o=>{if(o&&o.id){const n=parseInt(String(o.id).replace(/\D/g,""));if(!isNaN(n)&&n>=UID)UID=n+1;}});
   return arr.filter(o=>o&&o.title).map(o=>{
     let cells=[];
+    const mapReg=r=>REG_MAP[r]||r, mapSeg=s=>SEG_MAP[s]||s; // миграция старых кодов в названия; SME/PRODUCT отсеются ниже
     if(Array.isArray(o.cells)){
-      cells=o.cells.filter(c=>c&&REGIONS.includes(c.region)&&SEGMENTS.includes(c.segment))
-        .map(c=>({region:c.region,segment:c.segment,tasks:Math.max(0,Math.round(+c.tasks||0))})).filter(c=>c.tasks>0);
+      cells=o.cells.filter(c=>c).map(c=>({region:mapReg(c.region),segment:mapSeg(c.segment),tasks:Math.max(0,Math.round(+c.tasks||0))}))
+        .filter(c=>REGIONS.includes(c.region)&&SEGMENTS.includes(c.segment)&&isAllowed(c.region,c.segment)&&c.tasks>0);
     } else if(Array.isArray(o.regions)&&Array.isArray(o.segments)){ // старый формат -> равный сплит
-      const rs=o.regions.filter(r=>REGIONS.includes(r)), ss=o.segments.filter(s=>SEGMENTS.includes(s));
+      const rs=o.regions.map(mapReg).filter(r=>REGIONS.includes(r)), ss=o.segments.map(mapSeg).filter(s=>SEGMENTS.includes(s));
       const tot=Math.max(0,Math.round(+o.tasks||0)), n=(rs.length*ss.length)||1, per=Math.round(tot/n);
       rs.forEach(r=>ss.forEach(s=>cells.push({region:r,segment:s,tasks:per})));
       cells=cells.filter(c=>c.tasks>0);
     }
-    return {id:o.id||("i"+(UID++)),title:String(o.title),owner:o.owner?String(o.owner):"",start:o.start||TODAY_ISO,end:o.end||o.start||TODAY_ISO,cells,ongoing:!!o.ongoing};
+    return {id:o.id||("i"+(UID++)),title:String(o.title),owner:o.owner?String(o.owner):"",start:o.start||TODAY_ISO,end:o.end||o.start||TODAY_ISO,cells,ongoing:!!o.ongoing,status:normStatus(o.status)};
   });
 }
 // производные от ячеек
@@ -621,11 +1000,16 @@ function flash(msg,err){
   clearTimeout(flash._t);flash._t=setTimeout(()=>el.classList.remove("show"),2200);
 }
 
+function typeMatch(it){
+  if(state.typeFilter==="once")return !it.ongoing;   // только кампании
+  if(state.typeFilter==="ongoing")return !!it.ongoing; // только сигналы
+  return true;                                         // все
+}
 function activeFiltered(){
-  return INITIATIVES.filter(it=>!state.excluded.has(it.title) && cellsMatch(it).length>0);
+  return INITIATIVES.filter(it=>!state.excluded.has(it.title) && typeMatch(it) && cellsMatch(it).length>0);
 }
 
-const state={regions:new Set(),segments:new Set(),excluded:new Set(),exOpen:false,month:null,selDate:null,zoom:"3"};
+const state={regions:new Set(),segments:new Set(),excluded:new Set(),exOpen:false,month:null,selDate:null,zoom:"3",scenario:null,scenarioMode:false,showProposed:false,typeFilter:"all",mxMode:(SETTINGS.mxMode==="perPerson"?"perPerson":"tasks")};
 
 function parseD(s){const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d);}
 function fmtNum(n){return n.toLocaleString("ru-RU");}
@@ -637,11 +1021,13 @@ function plural(n,a,b,c){const m=n%100,d=n%10;if(m>=11&&m<=14)return c;if(d===1)
 function filtered(){return DDATA.filter(d=>(state.regions.size===0||state.regions.has(d.region))&&(state.segments.size===0||state.segments.has(d.segment))&&!state.excluded.has(d.title));}
 function byDate(rows){const m={};rows.forEach(r=>{(m[r.date]=m[r.date]||[]).push(r);});return m;}
 function heat(t,maxT){if(t<=0)return"var(--h1)";const v=Math.log(t+1)/Math.log(maxT+1);if(v<.18)return"var(--h1)";if(v<.40)return"var(--h2)";if(v<.62)return"var(--h3)";if(v<.82)return"var(--h4)";return"var(--h5)";}
+// Единая АБСОЛЮТНАЯ шкала цвета по числу активных инициатив: одинаковое число — одинаковый цвет везде (календарь и лента).
+function countBand(n){if(n<=0)return null;if(n===1)return"var(--h1)";if(n<=3)return"var(--h2)";if(n<=7)return"var(--h3)";if(n<=14)return"var(--h4)";return"var(--h5)";}
 function textOn(t,maxT){const v=Math.log(t+1)/Math.log(maxT+1);return v>=.62?"#fff":"var(--ink)";}
 
 function nearestFreePeriod(){
   // ближайшее окно, где у выбранной команды <= 2 ПАРАЛЛЕЛЬНО активных инициатив (есть ёмкость под запуск)
-  const items=initiatives();
+  const items=initiatives().filter(i=>i.status==="принята");
   if(!items.length) return {start:0,end:6,load:0};
   const spans=items.map(i=>[Math.max(0,daysLeft(i.start)),daysLeft(i.end)]);
   const maxEnd=Math.max(...spans.map(s=>s[1]));
@@ -654,7 +1040,10 @@ function nearestFreePeriod(){
 }
 
 function renderKPIs(){
-  const items=initiatives();                 // title-level (Total Bank)
+  const all=initiatives();                    // title-level (Total Bank)
+  const items=all.filter(i=>i.status==="принята");   // обязательства = нагрузка
+  const proposed=all.filter(i=>i.status==="предложена");
+  const propTasks=proposed.reduce((s,i)=>s+i.tasks,0);
   const totalTasks=items.reduce((s,i)=>s+i.tasks,0);
   const byd={};items.forEach(it=>{byd[it.date]=(byd[it.date]||0)+it.tasks;});
   let pD=null,pV=-1;Object.entries(byd).forEach(([d,v])=>{if(v>pV){pV=v;pD=d;}});
@@ -667,9 +1056,10 @@ function renderKPIs(){
     fpV = fp.start<=0 ? "сейчас" : ("через "+fp.start+" "+plural(fp.start,"день","дня","дней"));
     fpSub = dm(sDate)+"–"+dm(eDate)+" · ≤2 активных "+(state.regions.size||state.segments.size?"у команды":"в банке");
   }
+  const scoped=(state.regions.size||state.segments.size||state.excluded.size);
   const cards=[
-    {lab:"Инициатив в работе",v:fmtNum(items.length),sub:(state.regions.size||state.segments.size||state.excluded.size)?"по выбранной команде":"всего"},
-    {lab:"Задач в работу",v:fmtNum(totalTasks),sub:(state.regions.size||state.segments.size)?"доля команды":"лидов / клиентов"},
+    {lab:"Принято в работу",v:fmtNum(items.length),sub:proposed.length?`+${proposed.length} в очереди`:(scoped?"по выбранной команде":"всего")},
+    {lab:"Задач в работе",v:fmtNum(totalTasks),sub:propTasks?`+${fmtNum(propTasks)} в очереди`:(state.regions.size||state.segments.size?"доля команды":"задачи")},
     {lab:"Свободный слот для запуска",v:fpV,sub:fpSub,free:true},
     {lab:"Пик закрытий",v:pD?fmtNum(pV):"—",sub:pD?("задач · "+fmtDate(pD)):"",star:true},
   ];
@@ -680,18 +1070,32 @@ function renderKPIs(){
     </div>`).join("");
 }
 
+function pruneFilters(){
+  // согласовать выбор с правилом регион×сегмент: убрать регионы, недопустимые для выбранных сегментов, и наоборот
+  if(state.segments.size){[...state.regions].forEach(r=>{if(![...state.segments].some(s=>isAllowed(r,s)))state.regions.delete(r);});}
+  if(state.regions.size){[...state.segments].forEach(s=>{if(![...state.regions].some(r=>isAllowed(r,s)))state.segments.delete(s);});}
+}
 function renderChips(){
-  document.getElementById("regionChips").innerHTML=REGIONS.map(r=>`<span class="chip ${state.regions.has(r)?'on':''}" data-region="${r}">${r}</span>`).join("");
-  document.getElementById("segChips").innerHTML=SEGMENTS.map(s=>`<span class="chip ${state.segments.has(s)?'on':''}" data-seg="${s}">${s}</span>`).join("");
-  document.querySelectorAll("[data-region]").forEach(el=>el.onclick=()=>{const r=el.dataset.region;state.regions.has(r)?state.regions.delete(r):state.regions.add(r);renderAll();});
-  document.querySelectorAll("[data-seg]").forEach(el=>el.onclick=()=>{const s=el.dataset.seg;state.segments.has(s)?state.segments.delete(s):state.segments.add(s);renderAll();});
+  const regAvail=r=>state.segments.size===0||[...state.segments].some(s=>isAllowed(r,s));
+  const segAvail=s=>state.regions.size===0||[...state.regions].some(r=>isAllowed(r,s));
+  document.getElementById("regionChips").innerHTML=REGIONS.map(r=>{const av=regAvail(r),on=state.regions.has(r);
+    return `<span class="chip ${on?'on':''} ${av?'':'disabled'}" ${av?`data-region="${r}"`:''} title="${av?'':'недоступно для выбранных сегментов'}">${r}</span>`;}).join("");
+  document.getElementById("segChips").innerHTML=SEGMENTS.map(s=>{const av=segAvail(s),on=state.segments.has(s);
+    return `<span class="chip ${on?'on':''} ${av?'':'disabled'}" ${av?`data-seg="${s}"`:''} title="${av?'':'недоступно для выбранных регионов'}">${s}</span>`;}).join("");
+  document.querySelectorAll("#regionChips [data-region]").forEach(el=>el.onclick=()=>{const r=el.dataset.region;state.regions.has(r)?state.regions.delete(r):state.regions.add(r);pruneFilters();renderAll();});
+  document.querySelectorAll("#segChips [data-seg]").forEach(el=>el.onclick=()=>{const s=el.dataset.seg;state.segments.has(s)?state.segments.delete(s):state.segments.add(s);pruneFilters();renderAll();});
   renderExclude();
 }
 function renderExclude(){
   const panel=document.getElementById("exPanel");
   panel.className="expanel"+(state.exOpen?" open":"");
-  panel.innerHTML=`<div class="exhint">Нажмите, чтобы исключить активность из всех расчётов. Зачёркнутые — исключены.</div>`+
-    TITLES.map(t=>{const off=state.excluded.has(t);return `<span class="exchip ${off?'off':''}" data-ex="${encodeURIComponent(t)}">${off?'+ ':''}${t}</span>`;}).join("");
+  const scoped=(state.regions.size||state.segments.size);
+  // только инициативы, релевантные выбранным командам (есть совпавшая ячейка); без фильтра — все
+  const titles=[...new Set(INITIATIVES.filter(it=>typeMatch(it) && cellsMatch(it).length>0).map(it=>it.title))].sort((a,b)=>a.localeCompare(b,'ru'));
+  const hint=`<div class="exhint">${scoped?'Инициативы выбранных команд. ':''}Нажмите, чтобы исключить инициативу из расчёта метрик. Зачёркнутые — исключены.</div>`;
+  panel.innerHTML=hint+(titles.length
+    ? titles.map(t=>{const off=state.excluded.has(t);return `<span class="exchip ${off?'off':''}" data-ex="${encodeURIComponent(t)}">${off?'+ ':''}${t}</span>`;}).join("")
+    : `<div class="exhint" style="opacity:.7">Нет инициатив по выбранным командам.</div>`);
   panel.querySelectorAll("[data-ex]").forEach(el=>el.onclick=()=>{const t=decodeURIComponent(el.dataset.ex);state.excluded.has(t)?state.excluded.delete(t):state.excluded.add(t);renderAll();});
   document.getElementById("exCount").textContent=state.excluded.size?("· исключено: "+state.excluded.size):"";
   document.getElementById("exToggle").classList.toggle("active",state.exOpen);
@@ -701,7 +1105,7 @@ function initiatives(){
   // из редактируемой модели: будущие (конец >= сегодня); задачи/команды — по совпавшим ячейкам фильтра
   return activeFiltered()
     .filter(it=>daysLeft(it.end)>=0)
-    .map(it=>{const cm=cellsMatch(it);return {id:it.id,title:it.title,owner:it.owner||"",start:it.start,end:it.end,date:it.end,ongoing:it.ongoing,cells:it.cells,tasks:cm.reduce((s,c)=>s+c.tasks,0),regions:new Set(cm.map(c=>c.region)),segments:new Set(cm.map(c=>c.segment)),n:cm.length};})
+    .map(it=>{const cm=cellsMatch(it);return {id:it.id,title:it.title,owner:it.owner||"",start:it.start,end:it.end,date:it.end,ongoing:it.ongoing,status:normStatus(it.status),cells:it.cells,tasks:cm.reduce((s,c)=>s+c.tasks,0),regions:new Set(cm.map(c=>c.region)),segments:new Set(cm.map(c=>c.segment)),n:cm.length};})
     .sort((a,b)=>parseD(a.end)-parseD(b.end)||b.tasks-a.tasks);
 }
 function renderTimeline(){
@@ -721,10 +1125,11 @@ function renderTimeline(){
     const reg=it.regions.size>1?it.regions.size+" рег.":[...it.regions][0];
     const seg=it.segments.size>1?it.segments.size+" сег.":[...it.segments][0];
     const startFut=daysLeft(it.start)>0;
-    return `<div class="ini ${state.selDate===it.end?'sel':''}" data-date="${it.end}">
+    const st=STATUS_META[it.status]||STATUS_META[DEFAULT_STATUS];
+    return `<div class="ini ${st.c} ${state.selDate===it.end?'sel':''}" data-date="${it.end}">
       <div class="ini-top"><span class="ini-name">${it.title}</span>
         <span class="ini-right"><span class="ini-tasks">${fmtNum(it.tasks)}<i>зад.</i></span><button class="editbtn" data-edit="${it.id}" title="Редактировать">✎</button></span></div>
-      <div class="ini-meta">${it.owner?'отв.: '+it.owner+' · ':''}${reg} · ${seg}${it.n>1?' · '+it.n+' '+plural(it.n,'команда','команды','команд'):''} · ${ong?'постоянная':'единичная'}</div>
+      <div class="ini-meta"><span class="st-badge ${st.c}">${st.l}</span> · ${it.owner?'отв.: '+it.owner+' · ':''}${reg} · ${seg}${it.n>1?' · '+it.n+' '+plural(it.n,'команда','команды','команд'):''} · ${ong?'сигнал':'кампания'}</div>
       <div class="ini-run">
         <span class="run-now">${startFut?'старт '+sh(it.start):'сегодня'}</span>
         <div class="run-track">${sOff>0?`<span class="run-start" style="left:${L}%"></span>`:''}<div class="run-fill ${cls}" style="left:${L}%;width:${W}%"></div><span class="run-node ${cls}" style="left:${R}%"></span></div>
@@ -745,16 +1150,45 @@ function buildMonthKeys(){
   while(cur<=max){keys.push(cur.getFullYear()+"-"+cur.getMonth());cur.setMonth(cur.getMonth()+1);}
   MONTH_KEYS=keys;
 }
-function monthTasks(rows){const m={};rows.forEach(r=>{const d=parseD(r.date);const k=d.getFullYear()+"-"+d.getMonth();m[k]=(m[k]||0)+r.tasks;});return m;}
+function monthTasks(rows){
+  // активные в месяце: интервал инициативы старт..конец пересекает месяц (та же логика, что и в матрице загрузки)
+  const m={};
+  MONTH_KEYS.forEach(k=>{
+    const[y,mi]=k.split("-").map(Number);
+    const ms=`${y}-${String(mi+1).padStart(2,"0")}-01`;
+    const last=new Date(y,mi+1,0).getDate();
+    const me=`${y}-${String(mi+1).padStart(2,"0")}-${String(last).padStart(2,"0")}`;
+    let t=0;rows.forEach(r=>{if(r.start<=me&&r.end>=ms)t+=r.tasks;});
+    m[k]=t;
+  });
+  return m;
+}
+function monthInits(rows){
+  // число активных инициатив по месяцам (та же логика пересечения интервала, что и в задачах)
+  const m={};
+  MONTH_KEYS.forEach(k=>{
+    const[y,mi]=k.split("-").map(Number);
+    const ms=`${y}-${String(mi+1).padStart(2,"0")}-01`;
+    const last=new Date(y,mi+1,0).getDate();
+    const me=`${y}-${String(mi+1).padStart(2,"0")}-${String(last).padStart(2,"0")}`;
+    let n=0;rows.forEach(r=>{if(r.start<=me&&r.end>=ms)n++;});
+    m[k]=n;
+  });
+  return m;
+}
 function renderRibbon(){
-  const mt=monthTasks(initiatives());const max=Math.max(1,...Object.values(mt));
+  const items=initiatives().filter(i=>i.status==="принята");
+  const mc=monthInits(items);          // активных инициатив (цвет + высота)
+  const mt=monthTasks(items);          // активных задач (в подсказке)
+  const maxN=Math.max(1,...Object.values(mc));
   document.getElementById("ribbon").innerHTML=MONTH_KEYS.map(k=>{
-    const[y,mi]=k.split("-").map(Number);const t=mt[k]||0;
-    const hPct=t>0?(15+85*Math.log(t+1)/Math.log(max+1)):0;
-    return `<div class="mo ${state.month===k?'sel':''}" data-mo="${k}" title="${fmtNum(t)} задач">
+    const[y,mi]=k.split("-").map(Number);const n=mc[k]||0,t=mt[k]||0;
+    const hPct=n>0?(15+85*n/maxN):0;
+    const bg=countBand(n)||"var(--line-soft)";
+    return `<div class="mo ${state.month===k?'sel':''}" data-mo="${k}" title="${n} ${plural(n,'инициатива','инициативы','инициатив')} · ${fmtNum(t)} задач">
       <div class="mn">${MONTHS_SHORT[mi]} '${String(y).slice(2)}</div>
-      <div class="bar"><div class="fill" style="height:${hPct}%;background:${heat(t,max)}"></div></div>
-      <div class="mt num">${t>0?fmtNum(t):'—'}</div><div class="ml">${y}</div>
+      <div class="bar"><div class="fill" style="height:${hPct}%;background:${bg}"></div></div>
+      <div class="mt num">${n>0?n:'—'}</div><div class="ml">${y}</div>
     </div>`;
   }).join("");
   document.querySelectorAll("[data-mo]").forEach(el=>el.onclick=()=>{state.month=el.dataset.mo;state.selDate=null;renderRibbon();renderCalendar();renderDetail();});
@@ -764,7 +1198,7 @@ function renderCalendar(){
   const[y,mi]=state.month.split("-").map(Number);
   document.getElementById("mLabel").textContent=MONTHS_RU[mi]+" "+y;
   // активность на интервале старт..конец: кампания активна в день D, если start<=D<=end
-  const items=initiatives();
+  const items=initiatives().filter(i=>i.status==="принята");
   const spans=items.map(i=>[Math.max(0,daysLeft(i.start)),daysLeft(i.end)]); // [startOff, endOff]
   const activeAt=off=>spans.reduce((c,[a,b])=>c+(off>=a&&off<=b?1:0),0);
   let maxEnd=0;items.forEach(i=>{const e=daysLeft(i.end);if(e>maxEnd)maxEnd=e;});
@@ -784,7 +1218,7 @@ function renderCalendar(){
     const inSpan=(selOff!==null && off>=0 && off<=selOff);
     const cl=closing[ds];
     if(active>0){
-      const v=active/maxActive, bg=band(v), col=v>=.55?"#fff":"var(--ink)";
+      const bg=countBand(active), col=active>=8?"#fff":"var(--ink)";
       const soon=cl && off<=7;
       cells.push(`<div class="cell has ${state.selDate===ds?'sel':''} ${isToday?'today':''} ${inSpan?'inspan':''}" data-day="${ds}" style="background:${bg}">
         <div class="dn" style="color:${col}">${day}</div>
@@ -802,9 +1236,9 @@ function renderCalendar(){
 
 function renderDetail(){
   const box=document.getElementById("detail");
-  if(!state.selDate){box.innerHTML=`<div class="empty-msg">Выберите день в календаре или кампанию на таймлайне. Фон дня — сколько кампаний активно, кольцо — сколько закрывается.</div>`;return;}
+  if(!state.selDate){box.innerHTML=`<div class="empty-msg">Выберите день в календаре или инициативу на таймлайне. Фон дня — сколько инициатив активно, кольцо — сколько закрывается.</div>`;return;}
   const ds=state.selDate, off=daysLeft(ds);
-  const items=initiatives();
+  const items=initiatives().filter(i=>i.status==="принята");
   const active=items.filter(i=>Math.max(0,daysLeft(i.start))<=off && daysLeft(i.end)>=off);
   const activeTasks=active.reduce((s,i)=>s+i.tasks,0);
   const closingRows=items.filter(i=>i.end===ds).sort((a,b)=>b.tasks-a.tasks);
@@ -815,12 +1249,12 @@ function renderDetail(){
     body=`<div class="closehead">Закрывается в этот день · ${closingRows.length} ${plural(closingRows.length,"инициатива","инициативы","инициатив")} · ${fmtNum(closeTasks)} задач</div>`+
       closingRows.map(r=>`<div class="act"><div class="ti">${r.title}</div>
         <div class="tk num">${fmtNum(r.tasks)}<small>задач</small></div>
-        <div class="meta">${r.owner?`<span class="badge own">отв.: ${r.owner}</span>`:''}<span class="badge">${r.regions.size} рег.</span><span class="badge seg">${r.segments.size} сег.</span><span class="badge">${r.ongoing?'постоянная':'единичная'}</span><button class="editbtn sm" data-edit="${r.id}" title="Редактировать">✎</button></div>
+        <div class="meta">${r.owner?`<span class="badge own">отв.: ${r.owner}</span>`:''}<span class="badge">${r.regions.size} рег.</span><span class="badge seg">${r.segments.size} сег.</span><span class="badge">${r.ongoing?'сигнал':'кампания'}</span><button class="editbtn sm" data-edit="${r.id}" title="Редактировать">✎</button></div>
       </div>`).join("");
   } else {
     const nxt=active.slice().sort((a,b)=>daysLeft(a.end)-daysLeft(b.end))[0];
     const nd=nxt?daysLeft(nxt.end):null;
-    body=`<div class="closehead muted">В этот день ничего не закрывается — идёт работа по активным кампаниям.${nxt?` Ближайшее закрытие: «${nxt.title}» ${fmtDate(nxt.end)} (через ${nd} ${plural(nd,"день","дня","дней")}).`:''}</div>`;
+    body=`<div class="closehead muted">В этот день ничего не закрывается — идёт работа по активным инициативам.${nxt?` Ближайшее закрытие: «${nxt.title}» ${fmtDate(nxt.end)} (через ${nd} ${plural(nd,"день","дня","дней")}).`:''}</div>`;
   }
   box.innerHTML=`
     <div class="dh"><div class="dt">${fmtDate(ds)} · <span style="color:var(--muted);font-weight:500">${leftTxt}</span></div>
@@ -829,41 +1263,108 @@ function renderDetail(){
   box.querySelectorAll(".editbtn").forEach(el=>el.onclick=(e)=>{e.stopPropagation();openEditor(el.dataset.edit);});
 }
 
+function renderScenarioBar(scn,scnActive,SA,M){
+  const bar=document.getElementById("scenarioBar");
+  if(!scn){bar.style.display="none";bar.innerHTML="";return;}
+  bar.style.display="";
+  let verdict;
+  if(!scnActive){
+    verdict=`Период ${fmtDate(scn.start)} → ${fmtDate(scn.end)} — в этом месяце сценарий не активен. Листайте месяцы ‹ ›.`;
+  }else{
+    const aff=Object.keys(SA).filter(k=>SA[k]>0);
+    const totalAdd=aff.reduce((a,k)=>a+SA[k],0);
+    let heavy=null,hp=-1;aff.forEach(k=>{const p=(M[k]?M[k].t:0)+SA[k];if(p>hp){hp=p;heavy=k;}});
+    let tail="";
+    if(heavy){const[hr,hs]=heavy.split("|");const hb=M[heavy]?M[heavy].t:0;tail=` · тяжелее всего ${regShort(hr)}·${hs}: ${fmtNum(hb)} → ${fmtNum(hp)}`;}
+    verdict=`+${fmtNum(totalAdd)} ${plural(totalAdd,"задача","задачи","задач")} на ${aff.length} ${plural(aff.length,"команду","команды","команд")} в этом месяце${tail}.`;
+  }
+  bar.innerHTML=`<div class="scn-head"><span class="scn-tag">Что-если</span><span class="scn-title">${escHtml(scn.title||"Сценарий")}</span></div>
+    <div class="scn-verdict">${verdict}</div>
+    <div class="scn-actions"><button class="toolbtn" id="scnEdit">Изменить</button><button class="toolbtn" id="scnCommit">Добавить как инициативу</button><button class="toolbtn scn-reset" id="scnReset">Сбросить</button></div>`;
+  document.getElementById("scnEdit").onclick=()=>openEditor("new",{prefill:scn,scenario:true});
+  document.getElementById("scnCommit").onclick=()=>openEditor("new",{prefill:{...scn,status:"предложена"}});
+  document.getElementById("scnReset").onclick=()=>{state.scenario=null;renderAll();};
+}
 function renderMatrix(){
   const[y,mi]=state.mxMonth.split("-").map(Number);
   document.getElementById("mxLabel").textContent=MONTHS_RU[mi]+" "+y;
   const lastDay=new Date(y,mi+1,0).getDate();
   const mStartISO=`${y}-${String(mi+1).padStart(2,"0")}-01`;
   const mEndISO=`${y}-${String(mi+1).padStart(2,"0")}-${String(lastDay).padStart(2,"0")}`;
-  // инициатива активна в месяце, если её интервал старт..конец пересекает месяц
-  const inits=INITIATIVES.filter(it=>!state.excluded.has(it.title) && it.start<=mEndISO && it.end>=mStartISO);
+  // инициатива активна в месяце, если её интервал старт..конец пересекает месяц; база матрицы = принятые (обязательства)
+  const inits=INITIATIVES.filter(it=>!state.excluded.has(it.title) && typeMatch(it) && it.status==="принята" && it.start<=mEndISO && it.end>=mStartISO);
   const M={},rowTot={},colTot={};let grand=0;
   inits.forEach(it=>it.cells.forEach(c=>{const k=c.region+"|"+c.segment;const o=M[k]||(M[k]={t:0,n:0});o.t+=c.tasks;o.n++;rowTot[c.region]=(rowTot[c.region]||0)+c.tasks;colTot[c.segment]=(colTot[c.segment]||0)+c.tasks;grand+=c.tasks;}));
-  const segs=SEGMENTS.filter(s=>colTot[s]>0), regs=REGIONS.filter(r=>rowTot[r]>0);
-  document.getElementById("mxSum").textContent=inits.length+" "+plural(inits.length,"инициатива","инициативы","инициатив")+" · "+fmtNum(grand)+" задач";
-  if(!regs.length){document.getElementById("matrix").innerHTML='<div class="empty-msg">В этом месяце нет активных команд.</div>';return;}
+  // --- наложения: сценарий «что-если» + очередь (предложенные) ---
+  const scn=state.scenario, scnActive=!!(scn && scn.start<=mEndISO && scn.end>=mStartISO);
+  const SA={};
+  if(scnActive)scn.cells.forEach(c=>{if(isAllowed(c.region,c.segment)){const k=c.region+"|"+c.segment;SA[k]=(SA[k]||0)+c.tasks;}});
+  const PA={};let propCount=0;
+  if(state.showProposed){
+    INITIATIVES.filter(it=>!state.excluded.has(it.title)&&typeMatch(it)&&it.status==="предложена"&&it.start<=mEndISO&&it.end>=mStartISO)
+      .forEach(it=>{propCount++;it.cells.forEach(c=>{if(isAllowed(c.region,c.segment)){const k=c.region+"|"+c.segment;PA[k]=(PA[k]||0)+c.tasks;}});});
+  }
+  const OV=k=>(SA[k]||0)+(PA[k]||0);
+  const projT=k=>(M[k]?M[k].t:0)+OV(k);
+  const colP={},rowP={};let grandP=0;
+  REGIONS.forEach(r=>SEGMENTS.forEach(s=>{const p=projT(r+"|"+s);if(p>0){colP[s]=(colP[s]||0)+p;rowP[r]=(rowP[r]||0)+p;grandP+=p;}}));
+  const segs=SEGMENTS.filter(s=>colP[s]>0), regs=REGIONS.filter(r=>rowP[r]>0);
+  const perPersonMode=state.mxMode==="perPerson";
+  let overN=0,nohcN=0;
+  if(perPersonMode){regs.forEach(r=>segs.forEach(s=>{if(!isAllowed(r,s))return;const t=projT(r+"|"+s);if(t<=0)return;const hc=+HEADCOUNT[r+"|"+s]||0;if(hc<=0){nohcN++;return;}if((t/hc)/RATE>=1.10)overN++;}));}
+  document.getElementById("mxSum").textContent=perPersonMode
+    ? ("норма "+RATE+" зад./чел · перегружено "+overN+" "+plural(overN,"команда","команды","команд")+(nohcN?(" · без числ.: "+nohcN):""))
+    : (inits.length+" "+plural(inits.length,"принятая","принятые","принятых")+" · "+fmtNum(grand)+" задач");
+  const pt=document.getElementById("propToggle");if(pt)pt.classList.toggle("on",state.showProposed);
+  renderScenarioBar(scn,scnActive,SA,M);
+  if(!regs.length){document.getElementById("matrix").innerHTML='<div class="empty-msg">В этом месяце нет активных принятых команд.</div>';return;}
   // общий масштаб цвета по всем месяцам (busiest cell), чтобы поздние месяцы были заметно светлее
-  const GA={};INITIATIVES.filter(it=>!state.excluded.has(it.title)).forEach(it=>it.cells.forEach(c=>{const k=c.region+"|"+c.segment;GA[k]=(GA[k]||0)+c.tasks;}));
-  const maxCell=Math.max(1,...Object.values(GA));
+  const GA={};INITIATIVES.filter(it=>!state.excluded.has(it.title)&&typeMatch(it)&&it.status==="принята").forEach(it=>it.cells.forEach(c=>{const k=c.region+"|"+c.segment;GA[k]=(GA[k]||0)+c.tasks;}));
+  let maxCell=Math.max(1,...Object.values(GA));
+  if(scnActive||state.showProposed)REGIONS.forEach(r=>SEGMENTS.forEach(s=>{maxCell=Math.max(maxCell,projT(r+"|"+s));}));
   const band=v=>{if(v<=0)return"transparent";if(v<.12)return"var(--h1)";if(v<.30)return"var(--h2)";if(v<.55)return"var(--h3)";if(v<.80)return"var(--h4)";return"var(--h5)";};
+  const utilBand=u=>{if(u<.85)return"#2F8F5B";if(u<1.10)return"#D98E2B";return"#C9596F";}; // зелёный / янтарь / красный
+  const fmtPP=x=>x<10?x.toFixed(1):String(Math.round(x));
   const selR=state.regions, selS=state.segments;
   let html='<table class="mx"><thead><tr><th class="corner"></th>';
   segs.forEach(s=>{const on=selS.has(s)?'on':'';html+=`<th class="cseg ${on}" data-seg="${s}" title="${s}">${s}</th>`;});
   html+='<th class="tot">Σ</th></tr></thead><tbody>';
   regs.forEach(r=>{
     const on=selR.has(r)?'on':'';
-    html+=`<tr><th class="creg ${on}" data-region="${r}">${r}</th>`;
+    html+=`<tr><th class="creg ${on}" data-region="${r}" title="${r}">${regShort(r)}</th>`;
     segs.forEach(s=>{
-      const o=M[r+"|"+s];const t=o?o.t:0,n=o?o.n:0;const v=t/maxCell;const col=v>=.55?"#fff":"var(--ink)";
+      const k=r+"|"+s;
+      if(!isAllowed(r,s)){html+=`<td class="mxc na" title="нет такой команды по справочнику"><span class="namark">·</span></td>`;return;}
+      const base=M[k]?M[k].t:0, n=M[k]?M[k].n:0, add=OV(k), t=base+add;
       const hl=(selR.has(r)&&selS.has(s))?'hl':'';
-      html+=`<td class="mxc ${t>0?'has':''} ${hl}" data-region="${r}" data-seg="${s}" style="background:${band(v)}">${t>0?`<span class="mt" style="color:${col}">${fmtNum(t)}</span><span class="mn" style="color:${col}">${n}</span>`:''}</td>`;
+      if(perPersonMode){
+        if(t<=0){html+=`<td class="mxc ${hl}" data-region="${r}" data-seg="${s}"></td>`;return;}
+        const hc=+HEADCOUNT[k]||0;
+        if(hc<=0){html+=`<td class="mxc has nohc ${hl}" data-region="${r}" data-seg="${s}" title="${fmtNum(t)} задач · численность не указана"><span class="mt">—</span><span class="pp">${fmtNum(t)} зад · 0 чел</span></td>`;return;}
+        const pp=t/hc,u=pp/RATE,bg=utilBand(u);
+        html+=`<td class="mxc has ${hl}${add>0?' scn':''}" data-region="${r}" data-seg="${s}" style="background:${bg}" title="${fmtNum(t)} задач ÷ ${hc} чел = ${pp.toFixed(1)} на человека · ${Math.round(u*100)}% нормы (${RATE})"><span class="mt" style="color:#fff">${fmtPP(pp)}</span><span class="pp" style="color:#fff">${hc} чел · ${Math.round(u*100)}%</span></td>`;
+        return;
+      }
+      const v=t/maxCell;const col=v>=.55?"#fff":"var(--ink)";
+      const sub=add>0?`<span class="mn delta">+${fmtNum(add)}</span>`:(t>0?`<span class="mn" style="color:${col}">${n}</span>`:'');
+      html+=`<td class="mxc ${t>0?'has':''} ${hl}${add>0?' scn':''}" data-region="${r}" data-seg="${s}" style="background:${band(v)}">${t>0?`<span class="mt" style="color:${col}">${fmtNum(t)}</span>${sub}`:''}</td>`;
     });
-    html+=`<td class="tot num">${fmtNum(rowTot[r]||0)}</td></tr>`;
+    if(perPersonMode){const hcr=hcSum(r,null);const av=hcr>0?(rowP[r]||0)/hcr:0;html+=`<td class="tot num" title="${fmtNum(rowP[r]||0)} задач ÷ ${hcr} чел">${hcr>0?fmtPP(av):'—'}</td></tr>`;}
+    else html+=`<td class="tot num">${fmtNum(rowP[r]||0)}</td></tr>`;
   });
   html+='<tr class="totrow"><th class="tot">Σ</th>';
-  segs.forEach(s=>{html+=`<td class="tot num">${fmtNum(colTot[s]||0)}</td>`;});
-  html+=`<td class="tot num grand">${fmtNum(grand)}</td></tr></tbody></table>`;
+  if(perPersonMode){
+    segs.forEach(s=>{const hcc=hcSum(null,s);const av=hcc>0?(colP[s]||0)/hcc:0;html+=`<td class="tot num" title="${fmtNum(colP[s]||0)} задач ÷ ${hcc} чел">${hcc>0?fmtPP(av):'—'}</td>`;});
+    const hcg=hcSum(null,null);const avg=hcg>0?grandP/hcg:0;
+    html+=`<td class="tot num grand" title="${fmtNum(grandP)} задач ÷ ${hcg} чел">${hcg>0?fmtPP(avg):'—'}</td></tr></tbody></table>`;
+  }else{
+    segs.forEach(s=>{html+=`<td class="tot num">${fmtNum(colP[s]||0)}</td>`;});
+    html+=`<td class="tot num grand">${fmtNum(grandP)}</td></tr></tbody></table>`;
+  }
   const mx=document.getElementById("matrix");mx.innerHTML=html;
+  const mh=document.getElementById("mxHint");if(mh)mh.textContent=perPersonMode
+    ? "Режим «на человека»: число = задачи ÷ численность команды. Цвет — загрузка к норме: зелёный — есть запас, янтарь — под завязку, красный — перегруз. «—» = не указана численность (задайте её по кнопке с людьми). Норму меняйте справа от переключателя."
+    : "Ячейка = команда. Число = задачи команд, активных в выбранном месяце · клик по ячейке/заголовку — фильтр по команде. Выбранная команда сразу подсвечивает её инициативы в списке ниже.";
   mx.querySelectorAll(".mxc[data-region]").forEach(el=>el.onclick=()=>{const r=el.dataset.region,s=el.dataset.seg;const on=selR.has(r)&&selS.has(s);state.regions=new Set(on?[]:[r]);state.segments=new Set(on?[]:[s]);renderAll();});
   mx.querySelectorAll("th.creg").forEach(el=>el.onclick=()=>{const r=el.dataset.region;selR.has(r)?selR.delete(r):selR.add(r);renderAll();});
   mx.querySelectorAll("th.cseg").forEach(el=>el.onclick=()=>{const s=el.dataset.seg;selS.has(s)?selS.delete(s):selS.add(s);renderAll();});
@@ -876,7 +1377,7 @@ function stepMx(dir){
 }
 
 function renderUpcoming(){
-  const inits=initiatives();const grp={};inits.forEach(it=>{(grp[it.date]=grp[it.date]||[]).push(it);});
+  const inits=initiatives().filter(i=>i.status==="принята");const grp={};inits.forEach(it=>{(grp[it.date]=grp[it.date]||[]).push(it);});
   const items=Object.entries(grp).map(([d,arr])=>({date:d,dl:daysLeft(d),tasks:arr.reduce((s,r)=>s+r.tasks,0),n:arr.length,top:arr.slice().sort((a,b)=>b.tasks-a.tasks)[0]})).sort((a,b)=>a.dl-b.dl).slice(0,7);
   if(!items.length){document.getElementById("upcoming").innerHTML='<div class="empty-msg">Нет будущих дедлайнов по фильтру.</div>';return;}
   document.getElementById("upcoming").innerHTML=items.map(it=>{
@@ -889,22 +1390,62 @@ function renderUpcoming(){
   document.querySelectorAll("[data-jump]").forEach(el=>el.onclick=()=>{const ds=el.dataset.jump,d=parseD(ds);state.month=d.getFullYear()+"-"+d.getMonth();state.selDate=ds;renderRibbon();renderCalendar();renderDetail();renderTimeline();document.getElementById("calCard").scrollIntoView({behavior:"smooth",block:"start"});});
 }
 
-let editForm={cells:[],type:"once"};
-function openEditor(id){
-  const isNew=(id==="new"||id==null);
+let editForm={cells:[],type:"once",status:DEFAULT_STATUS};
+function renderStatusChips(){
+  const box=document.getElementById("fStatus");if(!box)return;
+  box.innerHTML=STATUSES.map(s=>`<button type="button" class="qp-chip ${editForm.status===s?'on':''}" data-st="${s}">${STATUS_META[s].l}</button>`).join("");
+  box.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{editForm.status=b.dataset.st;renderStatusChips();});
+}
+const qpState={segs:new Set(),regs:new Set()};
+function renderQuickpick(){
+  const segBox=document.getElementById("qpSegs"), regBox=document.getElementById("qpRegs");
+  if(!segBox||!regBox)return;
+  // регионы, доступные при выбранных сегментах (по тем же правилам зависимости)
+  let allowedRegs;
+  if(qpState.segs.size){allowedRegs=new Set();qpState.segs.forEach(s=>regionsFor(s).forEach(r=>allowedRegs.add(r)));}
+  else allowedRegs=new Set(REGIONS);
+  [...qpState.regs].forEach(r=>{if(!allowedRegs.has(r))qpState.regs.delete(r);}); // снять недопустимые
+  segBox.innerHTML=SEGMENTS.map(s=>`<button type="button" class="qp-chip ${qpState.segs.has(s)?'on':''}" data-seg="${s}">${s}</button>`).join("");
+  regBox.innerHTML=REGIONS.map(r=>{const dis=!allowedRegs.has(r);return `<button type="button" class="qp-chip ${qpState.regs.has(r)?'on':''} ${dis?'disabled':''}" data-reg="${r}"${dis?' disabled':''}>${regShort(r)}</button>`;}).join("");
+  segBox.querySelectorAll("[data-seg]").forEach(b=>b.onclick=()=>{const s=b.dataset.seg;qpState.segs.has(s)?qpState.segs.delete(s):qpState.segs.add(s);renderQuickpick();});
+  regBox.querySelectorAll("[data-reg]:not([disabled])").forEach(b=>b.onclick=()=>{const r=b.dataset.reg;qpState.regs.has(r)?qpState.regs.delete(r):qpState.regs.add(r);renderQuickpick();});
+}
+function qpResetState(){qpState.segs.clear();qpState.regs.clear();const m=document.getElementById("qpMsg");if(m)m.textContent="";}
+function qpAddSelected(){
+  const msg=document.getElementById("qpMsg");
+  if(!qpState.segs.size && !qpState.regs.size){if(msg)msg.textContent="Выберите хотя бы один сегмент или регион.";return;}
+  const segs=qpState.segs.size?[...qpState.segs]:SEGMENTS;
+  const regs=qpState.regs.size?[...qpState.regs]:REGIONS;
+  const cur=readCellsFromDOM();
+  const have=new Set(cur.map(c=>c.region+"|"+c.segment));
+  let added=0;
+  segs.forEach(s=>regs.forEach(r=>{if(isAllowed(r,s)&&!have.has(r+"|"+s)){cur.push({region:r,segment:s,tasks:0});have.add(r+"|"+s);added++;}}));
+  editForm.cells=cur;qpState.segs.clear();qpState.regs.clear();
+  renderCells();renderQuickpick();
+  if(msg)msg.textContent=added?`Добавлено команд: ${added}. Проставьте задачи в таблице ниже.`:"Нет новых допустимых сочетаний для выбранного.";
+}
+function openEditor(id, opts){
+  opts=opts||{};
+  state.scenarioMode=!!opts.scenario;
+  const fromNew=(id==="new"||id==null);
   let it;
-  if(isNew){it={title:"",owner:"",start:TODAY_ISO,end:TODAY_ISO,cells:[],ongoing:false};}
+  if(opts.prefill){it={title:opts.prefill.title||"",owner:opts.prefill.owner||"",start:opts.prefill.start,end:opts.prefill.end,cells:opts.prefill.cells||[],ongoing:!!opts.prefill.ongoing,status:normStatus(opts.prefill.status)};}
+  else if(fromNew){it={title:"",owner:"",start:TODAY_ISO,end:TODAY_ISO,cells:[],ongoing:false,status:NEW_STATUS};}
   else{it=INITIATIVES.find(x=>x.id===id);if(!it)return;}
-  state.editId=isNew?null:id;
-  document.getElementById("mTitle").textContent=isNew?"Новая инициатива":"Редактирование инициативы";
+  state.editId=(fromNew||opts.prefill)?null:id;
+  const mt=document.getElementById("mTitle"), ms=document.getElementById("mSave");
+  if(opts.scenario){mt.textContent="Что-если · импакт на загрузку";ms.textContent="Показать импакт";document.getElementById("mDelete").style.display="none";}
+  else{mt.textContent=(state.editId==null)?"Новая инициатива":"Редактирование инициативы";ms.textContent="Сохранить";document.getElementById("mDelete").style.display=(state.editId==null)?"none":"";}
   document.getElementById("fTitle").value=it.title;
   document.getElementById("fOwner").value=it.owner||"";
   document.getElementById("fStart").value=it.start;
   document.getElementById("fEnd").value=it.end;
-  editForm.cells=(it.cells&&it.cells.length)?it.cells.map(c=>({region:c.region,segment:c.segment,tasks:c.tasks})):[{region:REGIONS[0],segment:SEGMENTS[0],tasks:0}];
+  editForm.cells=(it.cells&&it.cells.length)?it.cells.map(c=>({region:c.region,segment:c.segment,tasks:c.tasks})):[{segment:SEGMENTS[0],region:regionsFor(SEGMENTS[0])[0],tasks:0}];
   editForm.type=it.ongoing?"ongoing":"once";
-  renderCells();setType(editForm.type);
-  document.getElementById("mDelete").style.display=isNew?"none":"";
+  editForm.status=normStatus(it.status);
+  renderCells();setType(editForm.type);renderStatusChips();
+  document.getElementById("statusField").style.display=(!opts.scenario && state.editId!=null)?"":"none";
+  qpResetState();renderQuickpick();
   document.getElementById("mErr").textContent="";
   document.getElementById("modal").classList.add("open");
 }
@@ -917,17 +1458,21 @@ function readCellsFromDOM(){
 }
 function renderCells(){
   const wrap=document.getElementById("fCells");
-  wrap.innerHTML=editForm.cells.map((c,i)=>`
+  wrap.innerHTML=editForm.cells.map((c,i)=>{
+    const seg=SEGMENTS.includes(c.segment)?c.segment:SEGMENTS[0];
+    const regs=regionsFor(seg)||[];
+    const reg=regs.includes(c.region)?c.region:(regs[0]||"");
+    return `
     <div class="cellrow" data-i="${i}">
-      <select class="cregion">${REGIONS.map(r=>`<option ${c.region===r?'selected':''}>${r}</option>`).join("")}</select>
-      <select class="csegment">${SEGMENTS.map(s=>`<option ${c.segment===s?'selected':''}>${s}</option>`).join("")}</select>
-      <input type="number" class="ctasks" min="0" step="1" value="${c.tasks}" placeholder="задач">
+      <select class="csegment">${SEGMENTS.map(s=>`<option ${seg===s?'selected':''}>${s}</option>`).join("")}</select>
+      <select class="cregion">${regs.map(r=>`<option value="${r}" ${reg===r?'selected':''}>${regShort(r)}</option>`).join("")}</select>
+      <input type="number" class="ctasks" min="0" step="1" inputmode="numeric" value="${c.tasks||''}" placeholder="0" onfocus="this.select()">
       <button class="cdel" title="Удалить">✕</button>
-    </div>`).join("")||`<div class="empty-msg" style="font-size:12px;padding:4px 0">Добавьте хотя бы одну команду.</div>`;
+    </div>`;}).join("")||`<div class="empty-msg" style="font-size:12px;padding:4px 0">Добавьте хотя бы одну команду.</div>`;
   wrap.querySelectorAll(".cellrow").forEach(row=>{
     const i=+row.dataset.i;
-    row.querySelector(".cregion").onchange=e=>{editForm.cells=readCellsFromDOM();updCellTot();};
-    row.querySelector(".csegment").onchange=e=>{editForm.cells=readCellsFromDOM();updCellTot();};
+    row.querySelector(".csegment").onchange=()=>{const cells=readCellsFromDOM();const regs=regionsFor(cells[i].segment);if(!regs.includes(cells[i].region))cells[i].region=regs[0]||"";editForm.cells=cells;renderCells();updCellTot();};
+    row.querySelector(".cregion").onchange=()=>{editForm.cells=readCellsFromDOM();updCellTot();};
     row.querySelector(".ctasks").oninput=()=>updCellTot();
     row.querySelector(".cdel").onclick=()=>{editForm.cells=readCellsFromDOM();editForm.cells.splice(i,1);renderCells();updCellTot();};
   });
@@ -937,73 +1482,222 @@ function updCellTot(){
   const tot=readCellsFromDOM().reduce((s,c)=>s+c.tasks,0);
   document.getElementById("cellTot").textContent="Σ задач: "+fmtNum(tot);
 }
-function setType(t){editForm.type=t;document.querySelectorAll("#fType button").forEach(b=>b.classList.toggle("on",b.dataset.type===t));}
-function closeEditor(){document.getElementById("modal").classList.remove("open");}
-function saveEditor(){
+function setType(t){
+  editForm.type=t;
+  document.querySelectorAll("#fType button").forEach(b=>b.classList.toggle("on",b.dataset.type===t));
+  const hint=document.getElementById("typeHint");
+  if(hint)hint.textContent = t==="ongoing"
+    ? "Сигнал — постоянная (ongoing) активность: идёт непрерывно и не привязана к конкретному периоду в году. Возникает по событию и отрабатывается по мере поступления, без окна старт–дедлайн."
+    : "Кампания — разовая активность на заданный период: есть старт и дедлайн, ограничена во времени и сама не возобновляется.";
+}
+function closeEditor(){state.scenarioMode=false;document.getElementById("modal").classList.remove("open");}
+async function saveEditor(){
   const title=document.getElementById("fTitle").value.trim();
   const owner=document.getElementById("fOwner").value.trim();
   const start=document.getElementById("fStart").value, end=document.getElementById("fEnd").value;
   const err=document.getElementById("mErr");
-  if(!title){err.textContent="Укажите название.";return;}
-  if(!owner){err.textContent="Укажите ответственного за запуск.";return;}
+  if(!title){err.textContent=state.scenarioMode?"Дайте сценарию короткое название.":"Укажите название.";return;}
+  if(!owner&&!state.scenarioMode){err.textContent="Укажите ответственного за запуск.";return;}
   if(!start||!end){err.textContent="Укажите даты старта и конца.";return;}
   if(end<start){err.textContent="Дата конца раньше даты старта.";return;}
   // собрать ячейки, слить дубли (регион+сегмент), оставить с задачами > 0
   const merged={};
   readCellsFromDOM().forEach(c=>{const k=c.region+"|"+c.segment;merged[k]=(merged[k]||0)+c.tasks;});
-  const cells=Object.entries(merged).map(([k,t])=>{const[region,segment]=k.split("|");return{region,segment,tasks:t};}).filter(c=>c.tasks>0);
+  const cells=Object.entries(merged).map(([k,t])=>{const[region,segment]=k.split("|");return{region,segment,tasks:t};}).filter(c=>c.tasks>0&&isAllowed(c.region,c.segment));
   if(!cells.length){err.textContent="Добавьте хотя бы одну команду с задачами больше 0.";return;}
-  const obj={title,owner,start,end,cells,ongoing:editForm.type==="ongoing"};
-  if(state.editId==null){obj.id="i"+(UID++);INITIATIVES.push(obj);}
-  else{Object.assign(INITIATIVES.find(x=>x.id===state.editId),obj);}
-  saveLS();closeEditor();state.selDate=null;renderAll();
+  if(state.scenarioMode){
+    state.scenario={title,owner,start,end,cells,ongoing:editForm.type==="ongoing"};
+    state.scenarioMode=false;closeEditor();
+    const sm=parseInt(start.slice(5,7),10)-1;state.mxMonth=start.slice(0,4)+"-"+sm; // показать месяц старта сценария
+    renderAll();return;
+  }
+  const obj={title,owner,start,end,cells,ongoing:editForm.type==="ongoing",status:normStatus(editForm.status)};
+  ensureUser();
+  if(LOCAL_MODE){
+    if(state.editId==null){
+      obj.id="i"+(UID++);INITIATIVES.push(obj);
+      const tot=cells.reduce((s,c)=>s+c.tasks,0);
+      logChange("создана",title,[`${statusLabel(obj.status)} · ${cells.length} ${plural(cells.length,'команда','команды','команд')} · ${fmtNum(tot)} задач`],obj.id);
+    }else{
+      const ex=INITIATIVES.find(x=>x.id===state.editId);const before=snapInit(ex);
+      Object.assign(ex,obj);const d=diffInit(before,snapInit(ex));
+      logChange("изменена",title,d.length?d:["без изменений"],state.editId);
+    }
+    saveLS();
+  }else{
+    try{
+      if(state.editId==null){
+        const row=await dbInsertInit(obj);const ni=rowToInit(row);INITIATIVES.push(ni);
+        const tot=cells.reduce((s,c)=>s+c.tasks,0);
+        logChange("создана",title,[`${statusLabel(ni.status)} · ${cells.length} ${plural(cells.length,'команда','команды','команд')} · ${fmtNum(tot)} задач`],ni.id);
+      }else{
+        const ex=INITIATIVES.find(x=>x.id===state.editId);const before=snapInit(ex);
+        await dbUpdateInit(state.editId,obj);
+        Object.assign(ex,obj);const d=diffInit(before,snapInit(ex));
+        logChange("изменена",title,d.length?d:["без изменений"],state.editId);
+      }
+    }catch(e){document.getElementById("mErr").textContent="Не удалось сохранить в базу: "+(e.message||e);return;}
+  }
+  state.scenario=null;
+  closeEditor();state.selDate=null;renderAll();
 }
-function deleteEditor(){
+async function deleteEditor(){
   if(state.editId==null){closeEditor();return;}
+  const it=INITIATIVES.find(x=>x.id===state.editId);
+  ensureUser();
+  if(!LOCAL_MODE){try{await dbDeleteInit(state.editId);}catch(e){document.getElementById("mErr").textContent="Не удалось удалить: "+(e.message||e);return;}}
+  if(it)logChange("удалена",it.title,[`${it.cells.length} ${plural(it.cells.length,'команда','команды','команд')} · ${fmtNum(it.cells.reduce((s,c)=>s+c.tasks,0))} задач`],state.editId);
   INITIATIVES=INITIATIVES.filter(x=>x.id!==state.editId);
-  saveLS();closeEditor();state.selDate=null;renderAll();
+  if(LOCAL_MODE)saveLS();
+  closeEditor();state.selDate=null;renderAll();
 }
 function exportJSON(){
-  const blob=new Blob([JSON.stringify(INITIATIVES,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="initiatives.json";a.click();
+  const bundle={schema:"salescal-backup",version:2,exportedAt:new Date().toISOString(),initiatives:INITIATIVES,headcount:HEADCOUNT,settings:{rate:RATE},log:LOG};
+  const blob=new Blob([JSON.stringify(bundle,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="salescal-backup.json";a.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
+function restoreBackup(file){
+  const rd=new FileReader();
+  rd.onload=async()=>{
+    let d;try{d=JSON.parse(rd.result);}catch(e){window.alert("Файл не читается как JSON.");return;}
+    const inits=Array.isArray(d)?d:(d&&Array.isArray(d.initiatives)?d.initiatives:null);
+    if(!inits){window.alert("В файле нет инициатив — это не похоже на бэкап календаря.");return;}
+    if(!window.confirm(LOCAL_MODE?"Загрузить данные из файла? Текущие инициативы и численность будут заменены.":"Загрузить данные из файла в общую базу? Текущие инициативы и численность в базе будут заменены."))return;
+    if(sb&&!LOCAL_MODE){
+      try{
+        await sb.from("initiatives").delete().neq("id","00000000-0000-0000-0000-000000000000");
+        const rows=normalizeInits(inits).map(initToRow);
+        if(rows.length){const {error}=await sb.from("initiatives").insert(rows);if(error)throw error;}
+        if(d&&d.headcount&&typeof d.headcount==="object"){
+          await sb.from("headcount").delete().neq("region","__none__");
+          const hr=Object.keys(d.headcount).map(k=>{const[region,segment]=k.split("|");return {region,segment,people:Math.round(+d.headcount[k]||0)};}).filter(x=>x.people>0);
+          if(hr.length)await sb.from("headcount").upsert(hr,{onConflict:"region,segment"});
+        }
+        if(d&&d.settings&&Number(d.settings.rate)>0)await dbSetRate(Number(d.settings.rate));
+        await dbLoadAll();state.selDate=null;renderAll();if(typeof renderLog==="function")renderLog();
+        flash("Данные загружены в базу");
+      }catch(e){window.alert("Не удалось загрузить в базу: "+(e.message||e));}
+      return;
+    }
+    INITIATIVES=normalizeInits(inits);syncUID();saveLS();
+    if(d&&d.headcount&&typeof d.headcount==="object"){HEADCOUNT={};Object.keys(d.headcount).forEach(k=>{const n=Math.round(+d.headcount[k]||0);if(n>0)HEADCOUNT[k]=n;});saveHeadcount();updateHcSum();}
+    if(d&&d.settings&&Number(d.settings.rate)>0){RATE=Number(d.settings.rate);SETTINGS.rate=RATE;saveSettings();applyMxModeUI();}
+    if(d&&Array.isArray(d.log)){LOG=d.log.slice(-500);saveLog();}
+    state.selDate=null;renderAll();if(typeof renderLog==="function")renderLog();
+    flash("Данные загружены из бэкапа");
+  };
+  rd.readAsText(file);
+}
 
-function renderAll(){renderChips();renderKPIs();renderTimeline();renderRibbon();renderCalendar();renderDetail();renderMatrix();renderUpcoming();}
+function renderAll(){renderChips();renderKPIs();renderTimeline();renderRibbon();renderCalendar();renderDetail();renderMatrix();renderUpcoming();renderExclude();}
+
+function renderLog(){
+  document.getElementById("logCount").textContent=LOG.length?("· "+LOG.length):"";
+  const box=document.getElementById("logList");
+  if(!LOG.length){box.innerHTML=`<div class="empty-msg">Изменений пока нет. Здесь появятся записи о создании, редактировании и удалении инициатив — с временем и автором.</div>`;return;}
+  const cls={"создана":"cr","изменена":"up","удалена":"de"};
+  box.innerHTML=LOG.slice().reverse().map(e=>`
+    <div class="logrow">
+      <div class="logtop"><span class="logact ${cls[e.action]||''}">${escHtml(e.action)}</span><span class="logttl">${escHtml(e.title||"—")}</span></div>
+      <div class="logmeta">${fmtDateTime(e.ts)} · ${escHtml(e.user||"—")}</div>
+      ${(e.details&&e.details.length)?`<ul class="logdet">${e.details.map(d=>`<li>${escHtml(d)}</li>`).join("")}</ul>`:""}
+    </div>`).join("");
+}
+function openLog(){renderLog();document.getElementById("logModal").classList.add("open");}
+function closeLog(){document.getElementById("logModal").classList.remove("open");}
+function exportLog(){
+  const rows=[["время","автор","действие","инициатива","детали"]].concat(LOG.slice().reverse().map(e=>[fmtDateTime(e.ts),e.user||"",e.action,e.title||"",(e.details||[]).join("; ")]));
+  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\r\n");
+  const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="changelog.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
 
 document.getElementById("prevM").onclick=()=>shiftMonth(-1);
 document.getElementById("nextM").onclick=()=>shiftMonth(1);
 function shiftMonth(dir){let[y,mi]=state.month.split("-").map(Number);mi+=dir;if(mi<0){mi=11;y--;}if(mi>11){mi=0;y++;}state.month=y+"-"+mi;state.selDate=null;renderRibbon();renderCalendar();renderDetail();}
-document.getElementById("resetBtn").onclick=()=>{state.regions.clear();state.segments.clear();state.excluded.clear();renderAll();};
+document.getElementById("resetBtn").onclick=()=>{state.regions.clear();state.segments.clear();state.excluded.clear();state.typeFilter="all";document.querySelectorAll("#typeFilter button").forEach(x=>x.classList.toggle("on",x.dataset.tf==="all"));renderAll();};
+document.querySelectorAll("#typeFilter button").forEach(b=>b.onclick=()=>{state.typeFilter=b.dataset.tf;document.querySelectorAll("#typeFilter button").forEach(x=>x.classList.toggle("on",x===b));renderAll();});
+// при заходе на страницу тип всегда «Все»
+state.typeFilter="all";document.querySelectorAll("#typeFilter button").forEach(x=>x.classList.toggle("on",x.dataset.tf==="all"));
 document.getElementById("exToggle").onclick=()=>{state.exOpen=!state.exOpen;renderExclude();};
 document.getElementById("zoom").querySelectorAll(".zbtn").forEach(b=>b.onclick=()=>{state.zoom=b.dataset.z;document.querySelectorAll("#zoom .zbtn").forEach(x=>x.classList.toggle("on",x===b));renderTimeline();});
 document.getElementById("addBtn").onclick=()=>openEditor("new");
 document.getElementById("mxPrev").onclick=()=>stepMx(-1);
 document.getElementById("mxNext").onclick=()=>stepMx(1);
 document.getElementById("exportBtn").onclick=exportJSON;
-document.getElementById("resetDataBtn").onclick=resetData;
+(()=>{const imp=document.getElementById("importInput");const btn=document.getElementById("importBtn");if(imp&&btn){btn.onclick=()=>imp.click();imp.onchange=()=>{if(imp.files&&imp.files[0])restoreBackup(imp.files[0]);imp.value="";};}})();
 document.getElementById("mClose").onclick=closeEditor;
 document.getElementById("mCancel").onclick=closeEditor;
 document.getElementById("mSave").onclick=saveEditor;
 document.getElementById("mDelete").onclick=deleteEditor;
 document.getElementById("modal").onclick=(e)=>{if(e.target.id==="modal")closeEditor();};
 document.querySelectorAll("#fType button").forEach(b=>b.onclick=()=>setType(b.dataset.type));
-document.getElementById("addCellBtn").onclick=()=>{editForm.cells=readCellsFromDOM();editForm.cells.push({region:REGIONS[0],segment:SEGMENTS[0],tasks:0});renderCells();};
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeEditor();});
+document.getElementById("addCellBtn").onclick=()=>{editForm.cells=readCellsFromDOM();const s=SEGMENTS[0];editForm.cells.push({segment:s,region:regionsFor(s)[0],tasks:0});renderCells();};
+document.getElementById("qpAdd").onclick=qpAddSelected;
+document.getElementById("logBtn").onclick=openLog;
+document.getElementById("logClose").onclick=closeLog;
+document.getElementById("logCloseBtn").onclick=closeLog;
+document.getElementById("logModal").onclick=(e)=>{if(e.target.id==="logModal")closeLog();};
+document.getElementById("logExport").onclick=exportLog;
+document.getElementById("authBtn").onclick=doAuth;
+document.getElementById("logoutBtn").onclick=logout;
+document.getElementById("authToggle").onclick=()=>{authMode=(authMode==="signup")?"signin":"signup";document.getElementById("authErr").textContent="";updateAuthMode();};
+document.getElementById("authName").addEventListener("keydown",e=>{if(e.key==="Enter")doAuth();});
+document.getElementById("authPass").addEventListener("keydown",e=>{if(e.key==="Enter")doAuth();});
+document.getElementById("hcBtn").onclick=openHeadcount;
+document.getElementById("whatifBtn").onclick=()=>openEditor("new",{scenario:true});
+document.getElementById("propToggle").onclick=()=>{state.showProposed=!state.showProposed;renderMatrix();};
+function applyMxModeUI(){
+  document.querySelectorAll("#mxModeToggle button").forEach(b=>b.classList.toggle("on",b.dataset.mm===state.mxMode));
+  const rb=document.getElementById("rateBox");if(rb)rb.classList.toggle("show",state.mxMode==="perPerson");
+  const ri=document.getElementById("rateInput");if(ri&&document.activeElement!==ri)ri.value=RATE;
+}
+document.querySelectorAll("#mxModeToggle button").forEach(b=>b.onclick=()=>{state.mxMode=b.dataset.mm;SETTINGS.mxMode=state.mxMode;saveSettings();applyMxModeUI();renderMatrix();});
+(()=>{const rin=document.getElementById("rateInput");if(rin){rin.value=RATE;rin.oninput=()=>{const v=Math.round(+rin.value||0);RATE=v>0?v:1;SETTINGS.rate=RATE;saveSettings();if(state.mxMode==="perPerson")renderMatrix();};rin.onchange=()=>dbSetRate(RATE);}})();
+applyMxModeUI();
+document.getElementById("hcClose").onclick=closeHeadcount;
+document.getElementById("hcCloseBtn").onclick=closeHeadcount;
+document.getElementById("hcModal").onclick=(e)=>{if(e.target.id==="hcModal")closeHeadcount();};
+document.getElementById("logClear").onclick=()=>{if(window.confirm("Очистить весь журнал изменений у всей команды? Это нельзя отменить.")){LOG=[];renderLog();if(sb)sb.from("change_log").delete().neq("id",0).then(r=>{if(r.error)console.error(r.error);});}};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeEditor();closeLog();closeHeadcount();}});
 window.addEventListener("resize",()=>{if(state.zoom==="all")renderTimeline();});
 
+async function afterLogin(session){
+  const u=session&&session.user;
+  currentUser=(u&&((u.user_metadata&&u.user_metadata.name)||u.email||u.id))||"—";
+  hideAuth();updateUserBox();
+  if(appStarted){return;}
+  appStarted=true;
+  await dbMaybeMigrate();
+  await dbLoadAll();
+  renderAll();
+  dbSubscribe();
+}
 (function(){
-  const saved=loadLS();
-  if(saved){INITIATIVES=normalizeInits(saved);syncUID();}
   buildMonthKeys();
   state.month=TODAY.getFullYear()+"-"+TODAY.getMonth();
   state.mxMonth=TODAY.getFullYear()+"-"+TODAY.getMonth();
   document.getElementById("pStart").textContent=fmtDate(DDATA.reduce((a,b)=>parseD(a.date)<parseD(b.date)?a:b).date);
   document.getElementById("pEnd").textContent=fmtDate(DDATA.reduce((a,b)=>parseD(a.date)>parseD(b.date)?a:b).date);
-  document.getElementById("todayLbl").textContent=fmtDate("2026-06-18");
-  const nInit=INITIATIVES.length;
-  document.getElementById("footNote").textContent=`${nInit} инициатив · правки сохраняются на этом устройстве · экспорт/импорт JSON · источник: calendar_figma.csv`;
+  document.getElementById("todayLbl").textContent=fmtDate(TODAY_ISO);
+  document.getElementById("footNote").textContent="Общий план команды · база Supabase · синхронизация в реальном времени";
   renderAll();
+  updateUserBox();updateAuthMode();
+  if(LOCAL_MODE){
+    const saved=loadLS();if(saved){INITIATIVES=normalizeInits(saved);syncUID();}
+    currentUser="Локально";updateUserBox();hideAuth();
+    document.getElementById("footNote").textContent="Локальный режим · данные в этом браузере · загрузите JSON через «⤒ Загрузить»";
+    renderAll();
+    return;
+  }
+  if(!sb){showAuth();document.getElementById("authErr").textContent="Не загрузился клиент Supabase (проверьте интернет).";return;}
+  sb.auth.onAuthStateChange((ev,sess)=>{
+    setTimeout(()=>{
+      if(sess){afterLogin(sess);}
+      else{appStarted=false;currentUser="";updateUserBox();showAuth();}
+    },0);
+  });
 })();
 </script>
 </body>
